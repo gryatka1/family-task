@@ -1,0 +1,418 @@
+2023/08/13 08:40:38 [emerg] 1#1: "server" directive is not allowed here in /etc/nginx/nginx.conf:1
+2023/08/13 08:40:39 [emerg] 1#1: "server" directive is not allowed here in /etc/nginx/nginx.conf:1
+2023/08/13 08:40:40 [emerg] 1#1: "server" directive is not allowed here in /etc/nginx/nginx.conf:1
+2023/08/13 08:40:41 [emerg] 1#1: "server" directive is not allowed here in /etc/nginx/nginx.conf:1
+2023/08/13 08:40:43 [emerg] 1#1: "server" directive is not allowed here in /etc/nginx/nginx.conf:1
+2023/08/13 08:40:45 [emerg] 1#1: "server" directive is not allowed here in /etc/nginx/nginx.conf:1
+2023/08/13 08:42:43 [notice] 1#1: using the "epoll" event method
+2023/08/13 08:42:43 [notice] 1#1: nginx/1.25.1
+2023/08/13 08:42:43 [notice] 1#1: built by gcc 12.2.1 20220924 (Alpine 12.2.1_git20220924-r4) 
+2023/08/13 08:42:43 [notice] 1#1: OS: Linux 5.15.90.1-microsoft-standard-WSL2
+2023/08/13 08:42:43 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/08/13 08:42:43 [notice] 1#1: start worker processes
+2023/08/13 08:42:43 [notice] 1#1: start worker process 29
+2023/08/13 08:42:43 [notice] 1#1: start worker process 30
+2023/08/13 08:42:43 [notice] 1#1: start worker process 31
+2023/08/13 08:42:43 [notice] 1#1: start worker process 32
+2023/08/13 08:42:43 [notice] 1#1: start worker process 33
+2023/08/13 08:42:43 [notice] 1#1: start worker process 34
+2023/08/13 08:42:43 [notice] 1#1: start worker process 35
+2023/08/13 08:42:43 [notice] 1#1: start worker process 36
+2023/08/13 08:53:30 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2023/08/13 08:53:30 [notice] 29#29: gracefully shutting down
+2023/08/13 08:53:30 [notice] 30#30: gracefully shutting down
+2023/08/13 08:53:30 [notice] 33#33: gracefully shutting down
+2023/08/13 08:53:30 [notice] 35#35: gracefully shutting down
+2023/08/13 08:53:30 [notice] 32#32: gracefully shutting down
+2023/08/13 08:53:30 [notice] 34#34: gracefully shutting down
+2023/08/13 08:53:30 [notice] 31#31: gracefully shutting down
+2023/08/13 08:53:30 [notice] 36#36: gracefully shutting down
+2023/08/13 08:53:30 [notice] 29#29: exiting
+2023/08/13 08:53:30 [notice] 30#30: exiting
+2023/08/13 08:53:30 [notice] 33#33: exiting
+2023/08/13 08:53:30 [notice] 35#35: exiting
+2023/08/13 08:53:30 [notice] 32#32: exiting
+2023/08/13 08:53:30 [notice] 34#34: exiting
+2023/08/13 08:53:30 [notice] 31#31: exiting
+2023/08/13 08:53:30 [notice] 36#36: exiting
+2023/08/13 08:53:30 [notice] 29#29: exit
+2023/08/13 08:53:30 [notice] 30#30: exit
+2023/08/13 08:53:30 [notice] 33#33: exit
+2023/08/13 08:53:30 [notice] 35#35: exit
+2023/08/13 08:53:30 [notice] 32#32: exit
+2023/08/13 08:53:30 [notice] 34#34: exit
+2023/08/13 08:53:30 [notice] 31#31: exit
+2023/08/13 08:53:30 [notice] 36#36: exit
+2023/08/13 08:53:30 [notice] 1#1: signal 17 (SIGCHLD) received from 30
+2023/08/13 08:53:30 [notice] 1#1: worker process 29 exited with code 0
+2023/08/13 08:53:30 [notice] 1#1: worker process 30 exited with code 0
+2023/08/13 08:53:30 [notice] 1#1: worker process 31 exited with code 0
+2023/08/13 08:53:30 [notice] 1#1: worker process 32 exited with code 0
+2023/08/13 08:53:30 [notice] 1#1: worker process 35 exited with code 0
+2023/08/13 08:53:30 [notice] 1#1: worker process 36 exited with code 0
+2023/08/13 08:53:30 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 08:53:30 [notice] 1#1: signal 17 (SIGCHLD) received from 32
+2023/08/13 08:53:30 [notice] 1#1: signal 17 (SIGCHLD) received from 33
+2023/08/13 08:53:30 [notice] 1#1: worker process 33 exited with code 0
+2023/08/13 08:53:30 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 08:53:30 [notice] 1#1: signal 17 (SIGCHLD) received from 34
+2023/08/13 08:53:30 [notice] 1#1: worker process 34 exited with code 0
+2023/08/13 08:53:30 [notice] 1#1: exit
+2023/08/13 08:54:05 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 08:54:14 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 08:54:23 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 08:54:54 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 08:55:02 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 08:56:05 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 08:56:14 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 09:02:18 [notice] 1#1: using the "epoll" event method
+2023/08/13 09:02:18 [notice] 1#1: nginx/1.25.1
+2023/08/13 09:02:18 [notice] 1#1: built by gcc 12.2.1 20220924 (Alpine 12.2.1_git20220924-r4) 
+2023/08/13 09:02:18 [notice] 1#1: OS: Linux 5.15.90.1-microsoft-standard-WSL2
+2023/08/13 09:02:18 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/08/13 09:02:18 [notice] 1#1: start worker processes
+2023/08/13 09:02:18 [notice] 1#1: start worker process 29
+2023/08/13 09:02:18 [notice] 1#1: start worker process 30
+2023/08/13 09:02:18 [notice] 1#1: start worker process 31
+2023/08/13 09:02:18 [notice] 1#1: start worker process 32
+2023/08/13 09:02:18 [notice] 1#1: start worker process 33
+2023/08/13 09:02:18 [notice] 1#1: start worker process 34
+2023/08/13 09:02:18 [notice] 1#1: start worker process 35
+2023/08/13 09:02:18 [notice] 1#1: start worker process 36
+2023/08/13 09:03:51 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2023/08/13 09:03:51 [notice] 29#29: gracefully shutting down
+2023/08/13 09:03:51 [notice] 30#30: gracefully shutting down
+2023/08/13 09:03:51 [notice] 31#31: gracefully shutting down
+2023/08/13 09:03:51 [notice] 33#33: gracefully shutting down
+2023/08/13 09:03:51 [notice] 34#34: gracefully shutting down
+2023/08/13 09:03:51 [notice] 32#32: gracefully shutting down
+2023/08/13 09:03:51 [notice] 35#35: gracefully shutting down
+2023/08/13 09:03:51 [notice] 36#36: gracefully shutting down
+2023/08/13 09:03:51 [notice] 30#30: exiting
+2023/08/13 09:03:51 [notice] 31#31: exiting
+2023/08/13 09:03:51 [notice] 33#33: exiting
+2023/08/13 09:03:51 [notice] 34#34: exiting
+2023/08/13 09:03:51 [notice] 32#32: exiting
+2023/08/13 09:03:51 [notice] 35#35: exiting
+2023/08/13 09:03:51 [notice] 36#36: exiting
+2023/08/13 09:03:51 [notice] 30#30: exit
+2023/08/13 09:03:51 [notice] 31#31: exit
+2023/08/13 09:03:51 [notice] 33#33: exit
+2023/08/13 09:03:51 [notice] 34#34: exit
+2023/08/13 09:03:51 [notice] 32#32: exit
+2023/08/13 09:03:51 [notice] 35#35: exit
+2023/08/13 09:03:51 [notice] 36#36: exit
+2023/08/13 09:03:51 [notice] 1#1: signal 17 (SIGCHLD) received from 30
+2023/08/13 09:03:51 [notice] 1#1: worker process 30 exited with code 0
+2023/08/13 09:03:51 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:03:51 [notice] 1#1: signal 17 (SIGCHLD) received from 32
+2023/08/13 09:03:51 [notice] 1#1: worker process 31 exited with code 0
+2023/08/13 09:03:51 [notice] 1#1: worker process 32 exited with code 0
+2023/08/13 09:03:51 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:03:51 [notice] 1#1: signal 17 (SIGCHLD) received from 34
+2023/08/13 09:03:51 [notice] 1#1: worker process 33 exited with code 0
+2023/08/13 09:03:51 [notice] 1#1: worker process 34 exited with code 0
+2023/08/13 09:03:51 [notice] 1#1: worker process 35 exited with code 0
+2023/08/13 09:03:51 [notice] 1#1: worker process 36 exited with code 0
+2023/08/13 09:03:51 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:03:51 [notice] 1#1: signal 17 (SIGCHLD) received from 36
+2023/08/13 09:04:07 [notice] 1#1: using the "epoll" event method
+2023/08/13 09:04:07 [notice] 1#1: nginx/1.25.1
+2023/08/13 09:04:07 [notice] 1#1: built by gcc 12.2.1 20220924 (Alpine 12.2.1_git20220924-r4) 
+2023/08/13 09:04:07 [notice] 1#1: OS: Linux 5.15.90.1-microsoft-standard-WSL2
+2023/08/13 09:04:07 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/08/13 09:04:07 [notice] 1#1: start worker processes
+2023/08/13 09:04:07 [notice] 1#1: start worker process 29
+2023/08/13 09:04:07 [notice] 1#1: start worker process 30
+2023/08/13 09:04:07 [notice] 1#1: start worker process 31
+2023/08/13 09:04:07 [notice] 1#1: start worker process 32
+2023/08/13 09:04:07 [notice] 1#1: start worker process 33
+2023/08/13 09:04:07 [notice] 1#1: start worker process 34
+2023/08/13 09:04:07 [notice] 1#1: start worker process 35
+2023/08/13 09:04:07 [notice] 1#1: start worker process 36
+2023/08/13 09:04:54 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2023/08/13 09:04:54 [notice] 29#29: gracefully shutting down
+2023/08/13 09:04:54 [notice] 30#30: gracefully shutting down
+2023/08/13 09:04:54 [notice] 31#31: gracefully shutting down
+2023/08/13 09:04:54 [notice] 32#32: gracefully shutting down
+2023/08/13 09:04:54 [notice] 33#33: gracefully shutting down
+2023/08/13 09:04:54 [notice] 34#34: gracefully shutting down
+2023/08/13 09:04:54 [notice] 36#36: gracefully shutting down
+2023/08/13 09:04:54 [notice] 35#35: gracefully shutting down
+2023/08/13 09:04:54 [notice] 29#29: exiting
+2023/08/13 09:04:54 [notice] 31#31: exiting
+2023/08/13 09:04:54 [notice] 32#32: exiting
+2023/08/13 09:04:54 [notice] 33#33: exiting
+2023/08/13 09:04:54 [notice] 34#34: exiting
+2023/08/13 09:04:54 [notice] 36#36: exiting
+2023/08/13 09:04:54 [notice] 35#35: exiting
+2023/08/13 09:04:54 [notice] 29#29: exit
+2023/08/13 09:04:54 [notice] 31#31: exit
+2023/08/13 09:04:54 [notice] 32#32: exit
+2023/08/13 09:04:54 [notice] 33#33: exit
+2023/08/13 09:04:54 [notice] 34#34: exit
+2023/08/13 09:04:54 [notice] 36#36: exit
+2023/08/13 09:04:54 [notice] 35#35: exit
+2023/08/13 09:04:54 [notice] 1#1: signal 17 (SIGCHLD) received from 33
+2023/08/13 09:04:54 [notice] 1#1: worker process 29 exited with code 0
+2023/08/13 09:04:54 [notice] 1#1: worker process 33 exited with code 0
+2023/08/13 09:04:54 [notice] 1#1: worker process 34 exited with code 0
+2023/08/13 09:04:54 [notice] 1#1: worker process 35 exited with code 0
+2023/08/13 09:04:54 [notice] 1#1: worker process 36 exited with code 0
+2023/08/13 09:04:54 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:04:54 [notice] 1#1: signal 17 (SIGCHLD) received from 34
+2023/08/13 09:04:54 [notice] 1#1: signal 17 (SIGCHLD) received from 31
+2023/08/13 09:04:54 [notice] 1#1: worker process 31 exited with code 0
+2023/08/13 09:04:54 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:04:54 [notice] 1#1: signal 17 (SIGCHLD) received from 32
+2023/08/13 09:04:54 [notice] 1#1: worker process 32 exited with code 0
+2023/08/13 09:04:54 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:08:13 [notice] 1#1: using the "epoll" event method
+2023/08/13 09:08:13 [notice] 1#1: nginx/1.25.1
+2023/08/13 09:08:13 [notice] 1#1: built by gcc 12.2.1 20220924 (Alpine 12.2.1_git20220924-r4) 
+2023/08/13 09:08:13 [notice] 1#1: OS: Linux 5.15.90.1-microsoft-standard-WSL2
+2023/08/13 09:08:13 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/08/13 09:08:13 [notice] 1#1: start worker processes
+2023/08/13 09:08:13 [notice] 1#1: start worker process 29
+2023/08/13 09:08:13 [notice] 1#1: start worker process 30
+2023/08/13 09:08:13 [notice] 1#1: start worker process 31
+2023/08/13 09:08:13 [notice] 1#1: start worker process 32
+2023/08/13 09:08:13 [notice] 1#1: start worker process 33
+2023/08/13 09:08:13 [notice] 1#1: start worker process 34
+2023/08/13 09:08:13 [notice] 1#1: start worker process 35
+2023/08/13 09:08:13 [notice] 1#1: start worker process 36
+2023/08/13 09:09:42 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2023/08/13 09:09:42 [notice] 29#29: gracefully shutting down
+2023/08/13 09:09:42 [notice] 31#31: gracefully shutting down
+2023/08/13 09:09:42 [notice] 30#30: gracefully shutting down
+2023/08/13 09:09:42 [notice] 34#34: gracefully shutting down
+2023/08/13 09:09:42 [notice] 34#34: exiting
+2023/08/13 09:09:42 [notice] 36#36: gracefully shutting down
+2023/08/13 09:09:42 [notice] 32#32: gracefully shutting down
+2023/08/13 09:09:42 [notice] 33#33: gracefully shutting down
+2023/08/13 09:09:42 [notice] 35#35: gracefully shutting down
+2023/08/13 09:09:42 [notice] 29#29: exiting
+2023/08/13 09:09:42 [notice] 31#31: exiting
+2023/08/13 09:09:42 [notice] 30#30: exiting
+2023/08/13 09:09:42 [notice] 34#34: exit
+2023/08/13 09:09:42 [notice] 36#36: exiting
+2023/08/13 09:09:42 [notice] 32#32: exiting
+2023/08/13 09:09:42 [notice] 33#33: exiting
+2023/08/13 09:09:42 [notice] 35#35: exiting
+2023/08/13 09:09:42 [notice] 29#29: exit
+2023/08/13 09:09:42 [notice] 31#31: exit
+2023/08/13 09:09:42 [notice] 30#30: exit
+2023/08/13 09:09:42 [notice] 36#36: exit
+2023/08/13 09:09:42 [notice] 32#32: exit
+2023/08/13 09:09:42 [notice] 33#33: exit
+2023/08/13 09:09:42 [notice] 35#35: exit
+2023/08/13 09:09:42 [notice] 1#1: signal 17 (SIGCHLD) received from 34
+2023/08/13 09:09:42 [notice] 1#1: worker process 34 exited with code 0
+2023/08/13 09:09:42 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:09:42 [notice] 1#1: signal 17 (SIGCHLD) received from 31
+2023/08/13 09:09:42 [notice] 1#1: worker process 31 exited with code 0
+2023/08/13 09:09:42 [notice] 1#1: worker process 35 exited with code 0
+2023/08/13 09:09:42 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:09:42 [notice] 1#1: signal 17 (SIGCHLD) received from 35
+2023/08/13 09:09:42 [notice] 1#1: signal 17 (SIGCHLD) received from 32
+2023/08/13 09:09:42 [notice] 1#1: worker process 32 exited with code 0
+2023/08/13 09:09:42 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:09:42 [notice] 1#1: signal 17 (SIGCHLD) received from 30
+2023/08/13 09:09:42 [notice] 1#1: worker process 29 exited with code 0
+2023/08/13 09:09:42 [notice] 1#1: worker process 30 exited with code 0
+2023/08/13 09:09:42 [notice] 1#1: worker process 33 exited with code 0
+2023/08/13 09:09:42 [notice] 1#1: worker process 36 exited with code 0
+2023/08/13 09:09:42 [notice] 1#1: exit
+2023/08/13 09:09:47 [notice] 1#1: using the "epoll" event method
+2023/08/13 09:09:47 [notice] 1#1: nginx/1.25.1
+2023/08/13 09:09:47 [notice] 1#1: built by gcc 12.2.1 20220924 (Alpine 12.2.1_git20220924-r4) 
+2023/08/13 09:09:47 [notice] 1#1: OS: Linux 5.15.90.1-microsoft-standard-WSL2
+2023/08/13 09:09:47 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/08/13 09:09:47 [notice] 1#1: start worker processes
+2023/08/13 09:09:47 [notice] 1#1: start worker process 29
+2023/08/13 09:09:47 [notice] 1#1: start worker process 30
+2023/08/13 09:09:47 [notice] 1#1: start worker process 31
+2023/08/13 09:09:47 [notice] 1#1: start worker process 32
+2023/08/13 09:09:47 [notice] 1#1: start worker process 33
+2023/08/13 09:09:47 [notice] 1#1: start worker process 34
+2023/08/13 09:09:47 [notice] 1#1: start worker process 35
+2023/08/13 09:09:47 [notice] 1#1: start worker process 36
+2023/08/13 09:10:00 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2023/08/13 09:10:00 [notice] 29#29: gracefully shutting down
+2023/08/13 09:10:00 [notice] 30#30: gracefully shutting down
+2023/08/13 09:10:00 [notice] 31#31: gracefully shutting down
+2023/08/13 09:10:00 [notice] 32#32: gracefully shutting down
+2023/08/13 09:10:00 [notice] 34#34: gracefully shutting down
+2023/08/13 09:10:00 [notice] 33#33: gracefully shutting down
+2023/08/13 09:10:00 [notice] 35#35: gracefully shutting down
+2023/08/13 09:10:00 [notice] 36#36: gracefully shutting down
+2023/08/13 09:10:00 [notice] 29#29: exiting
+2023/08/13 09:10:00 [notice] 31#31: exiting
+2023/08/13 09:10:00 [notice] 32#32: exiting
+2023/08/13 09:10:00 [notice] 34#34: exiting
+2023/08/13 09:10:00 [notice] 33#33: exiting
+2023/08/13 09:10:00 [notice] 35#35: exiting
+2023/08/13 09:10:00 [notice] 36#36: exiting
+2023/08/13 09:10:00 [notice] 29#29: exit
+2023/08/13 09:10:00 [notice] 31#31: exit
+2023/08/13 09:10:00 [notice] 32#32: exit
+2023/08/13 09:10:00 [notice] 34#34: exit
+2023/08/13 09:10:00 [notice] 33#33: exit
+2023/08/13 09:10:00 [notice] 35#35: exit
+2023/08/13 09:10:00 [notice] 36#36: exit
+2023/08/13 09:10:00 [notice] 1#1: signal 17 (SIGCHLD) received from 29
+2023/08/13 09:10:00 [notice] 1#1: worker process 29 exited with code 0
+2023/08/13 09:10:00 [notice] 1#1: worker process 33 exited with code 0
+2023/08/13 09:10:00 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:10:00 [notice] 1#1: signal 17 (SIGCHLD) received from 31
+2023/08/13 09:10:00 [notice] 1#1: worker process 31 exited with code 0
+2023/08/13 09:10:00 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:10:00 [notice] 1#1: signal 17 (SIGCHLD) received from 34
+2023/08/13 09:10:00 [notice] 1#1: worker process 34 exited with code 0
+2023/08/13 09:10:00 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:10:00 [notice] 1#1: signal 17 (SIGCHLD) received from 35
+2023/08/13 09:10:00 [notice] 1#1: worker process 35 exited with code 0
+2023/08/13 09:10:00 [notice] 1#1: worker process 36 exited with code 0
+2023/08/13 09:10:00 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:10:00 [notice] 1#1: signal 17 (SIGCHLD) received from 32
+2023/08/13 09:10:00 [notice] 1#1: worker process 32 exited with code 0
+2023/08/13 09:10:00 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:11:36 [notice] 1#1: using the "epoll" event method
+2023/08/13 09:11:36 [notice] 1#1: nginx/1.25.1
+2023/08/13 09:11:36 [notice] 1#1: built by gcc 12.2.1 20220924 (Alpine 12.2.1_git20220924-r4) 
+2023/08/13 09:11:36 [notice] 1#1: OS: Linux 5.15.90.1-microsoft-standard-WSL2
+2023/08/13 09:11:36 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/08/13 09:11:36 [notice] 1#1: start worker processes
+2023/08/13 09:11:36 [notice] 1#1: start worker process 29
+2023/08/13 09:11:36 [notice] 1#1: start worker process 30
+2023/08/13 09:11:36 [notice] 1#1: start worker process 31
+2023/08/13 09:11:36 [notice] 1#1: start worker process 32
+2023/08/13 09:11:36 [notice] 1#1: start worker process 33
+2023/08/13 09:11:36 [notice] 1#1: start worker process 34
+2023/08/13 09:11:36 [notice] 1#1: start worker process 35
+2023/08/13 09:11:36 [notice] 1#1: start worker process 36
+2023/08/13 09:48:27 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2023/08/13 09:48:27 [notice] 29#29: gracefully shutting down
+2023/08/13 09:48:27 [notice] 36#36: gracefully shutting down
+2023/08/13 09:48:27 [notice] 30#30: gracefully shutting down
+2023/08/13 09:48:27 [notice] 35#35: gracefully shutting down
+2023/08/13 09:48:27 [notice] 32#32: gracefully shutting down
+2023/08/13 09:48:27 [notice] 35#35: exiting
+2023/08/13 09:48:27 [notice] 31#31: gracefully shutting down
+2023/08/13 09:48:27 [notice] 33#33: gracefully shutting down
+2023/08/13 09:48:27 [notice] 34#34: gracefully shutting down
+2023/08/13 09:48:27 [notice] 29#29: exiting
+2023/08/13 09:48:27 [notice] 36#36: exiting
+2023/08/13 09:48:27 [notice] 30#30: exiting
+2023/08/13 09:48:27 [notice] 32#32: exiting
+2023/08/13 09:48:27 [notice] 35#35: exit
+2023/08/13 09:48:27 [notice] 31#31: exiting
+2023/08/13 09:48:27 [notice] 33#33: exiting
+2023/08/13 09:48:27 [notice] 34#34: exiting
+2023/08/13 09:48:27 [notice] 29#29: exit
+2023/08/13 09:48:27 [notice] 36#36: exit
+2023/08/13 09:48:27 [notice] 30#30: exit
+2023/08/13 09:48:27 [notice] 32#32: exit
+2023/08/13 09:48:27 [notice] 31#31: exit
+2023/08/13 09:48:27 [notice] 33#33: exit
+2023/08/13 09:48:27 [notice] 34#34: exit
+2023/08/13 09:48:27 [notice] 1#1: signal 17 (SIGCHLD) received from 31
+2023/08/13 09:48:27 [notice] 1#1: worker process 31 exited with code 0
+2023/08/13 09:48:27 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:48:27 [notice] 1#1: signal 17 (SIGCHLD) received from 32
+2023/08/13 09:48:27 [notice] 1#1: worker process 30 exited with code 0
+2023/08/13 09:48:27 [notice] 1#1: worker process 32 exited with code 0
+2023/08/13 09:48:27 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:48:27 [notice] 1#1: signal 17 (SIGCHLD) received from 34
+2023/08/13 09:48:27 [notice] 1#1: worker process 29 exited with code 0
+2023/08/13 09:48:27 [notice] 1#1: worker process 34 exited with code 0
+2023/08/13 09:48:27 [notice] 1#1: worker process 36 exited with code 0
+2023/08/13 09:48:27 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 09:48:27 [notice] 1#1: signal 17 (SIGCHLD) received from 36
+2023/08/13 09:48:27 [notice] 1#1: signal 17 (SIGCHLD) received from 33
+2023/08/13 09:48:27 [notice] 1#1: worker process 33 exited with code 0
+2023/08/13 09:48:27 [notice] 1#1: worker process 35 exited with code 0
+2023/08/13 09:48:27 [notice] 1#1: exit
+2023/08/13 10:00:29 [emerg] 1#1: invalid number of arguments in "root" directive in /etc/nginx/conf.d/default.conf:33
+2023/08/13 10:00:30 [emerg] 1#1: invalid number of arguments in "root" directive in /etc/nginx/conf.d/default.conf:33
+2023/08/13 10:00:31 [emerg] 1#1: invalid number of arguments in "root" directive in /etc/nginx/conf.d/default.conf:33
+2023/08/13 10:00:32 [emerg] 1#1: invalid number of arguments in "root" directive in /etc/nginx/conf.d/default.conf:33
+2023/08/13 10:03:32 [emerg] 1#1: "user" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:1
+2023/08/13 10:03:33 [emerg] 1#1: "user" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:1
+2023/08/13 10:03:34 [emerg] 1#1: "user" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:1
+2023/08/13 10:03:35 [emerg] 1#1: "user" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:1
+2023/08/13 10:05:15 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 10:05:24 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 10:06:47 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 10:06:56 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 10:07:05 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 10:07:50 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 10:07:59 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 10:08:08 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 10:12:57 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 10:13:06 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 10:13:15 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 10:13:23 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 10:13:32 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 10:13:41 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 10:13:50 [emerg] 1#1: host not found in upstream "php-fpm:9000" in /etc/nginx/conf.d/upstream.conf:1
+2023/08/13 10:30:41 [emerg] 1#1: host not found in upstream "microservice1_app_1" in /etc/nginx/conf.d/default.conf:14
+2023/08/13 10:30:49 [emerg] 1#1: host not found in upstream "microservice1_app_1" in /etc/nginx/conf.d/default.conf:14
+2023/08/13 10:31:06 [notice] 1#1: using the "epoll" event method
+2023/08/13 10:31:06 [notice] 1#1: nginx/1.25.1
+2023/08/13 10:31:06 [notice] 1#1: built by gcc 12.2.1 20220924 (Alpine 12.2.1_git20220924-r4) 
+2023/08/13 10:31:06 [notice] 1#1: OS: Linux 5.15.90.1-microsoft-standard-WSL2
+2023/08/13 10:31:06 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/08/13 10:31:06 [notice] 1#1: start worker processes
+2023/08/13 10:31:06 [notice] 1#1: start worker process 29
+2023/08/13 10:31:06 [notice] 1#1: start worker process 30
+2023/08/13 10:31:06 [notice] 1#1: start worker process 31
+2023/08/13 10:31:06 [notice] 1#1: start worker process 32
+2023/08/13 10:31:06 [notice] 1#1: start worker process 33
+2023/08/13 10:31:06 [notice] 1#1: start worker process 34
+2023/08/13 10:31:06 [notice] 1#1: start worker process 35
+2023/08/13 10:31:06 [notice] 1#1: start worker process 36
+2023/08/13 10:32:49 [error] 30#30: *2 recv() failed (104: Connection reset by peer) while reading response header from upstream, client: 172.19.0.1, server: microservice1.test, request: "GET /fdsfsd/rr HTTP/1.1", upstream: "http://172.19.0.2:9000/fdsfsd/rr", host: "localhost:210"
+2023/08/13 10:32:56 [error] 30#30: *2 recv() failed (104: Connection reset by peer) while reading response header from upstream, client: 172.19.0.1, server: microservice1.test, request: "GET / HTTP/1.1", upstream: "http://172.19.0.2:9000/", host: "localhost:210"
+2023/08/13 10:33:20 [error] 30#30: *2 recv() failed (104: Connection reset by peer) while reading response header from upstream, client: 172.19.0.1, server: microservice1.test, request: "GET /family HTTP/1.1", upstream: "http://172.19.0.2:9000/family", host: "localhost:210"
+2023/08/13 10:33:26 [error] 30#30: *2 recv() failed (104: Connection reset by peer) while reading response header from upstream, client: 172.19.0.1, server: microservice1.test, request: "GET /family/ HTTP/1.1", upstream: "http://172.19.0.2:9000/family/", host: "localhost:210"
+2023/08/13 10:33:29 [error] 30#30: *2 recv() failed (104: Connection reset by peer) while reading response header from upstream, client: 172.19.0.1, server: microservice1.test, request: "GET / HTTP/1.1", upstream: "http://172.19.0.2:9000/", host: "localhost:210"
+2023/08/13 10:34:19 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2023/08/13 10:34:19 [notice] 29#29: gracefully shutting down
+2023/08/13 10:34:19 [notice] 29#29: exiting
+2023/08/13 10:34:19 [notice] 30#30: gracefully shutting down
+2023/08/13 10:34:19 [notice] 32#32: gracefully shutting down
+2023/08/13 10:34:19 [notice] 31#31: gracefully shutting down
+2023/08/13 10:34:19 [notice] 34#34: gracefully shutting down
+2023/08/13 10:34:19 [notice] 35#35: gracefully shutting down
+2023/08/13 10:34:19 [notice] 36#36: gracefully shutting down
+2023/08/13 10:34:19 [notice] 36#36: exiting
+2023/08/13 10:34:19 [notice] 33#33: gracefully shutting down
+2023/08/13 10:34:19 [notice] 29#29: exit
+2023/08/13 10:34:19 [notice] 30#30: exiting
+2023/08/13 10:34:19 [notice] 32#32: exiting
+2023/08/13 10:34:19 [notice] 34#34: exiting
+2023/08/13 10:34:19 [notice] 35#35: exiting
+2023/08/13 10:34:19 [notice] 36#36: exit
+2023/08/13 10:34:19 [notice] 33#33: exiting
+2023/08/13 10:34:19 [notice] 30#30: exit
+2023/08/13 10:34:19 [notice] 32#32: exit
+2023/08/13 10:34:19 [notice] 34#34: exit
+2023/08/13 10:34:19 [notice] 35#35: exit
+2023/08/13 10:34:19 [notice] 33#33: exit
+2023/08/13 10:34:19 [notice] 1#1: signal 17 (SIGCHLD) received from 35
+2023/08/13 10:34:19 [notice] 1#1: worker process 35 exited with code 0
+2023/08/13 10:34:19 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 10:34:19 [notice] 1#1: signal 17 (SIGCHLD) received from 32
+2023/08/13 10:34:19 [notice] 1#1: worker process 32 exited with code 0
+2023/08/13 10:34:19 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 10:34:19 [notice] 1#1: signal 17 (SIGCHLD) received from 36
+2023/08/13 10:34:19 [notice] 1#1: worker process 36 exited with code 0
+2023/08/13 10:34:19 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 10:34:19 [notice] 1#1: signal 17 (SIGCHLD) received from 33
+2023/08/13 10:34:19 [notice] 1#1: worker process 29 exited with code 0
+2023/08/13 10:34:19 [notice] 1#1: worker process 30 exited with code 0
+2023/08/13 10:34:19 [notice] 1#1: worker process 33 exited with code 0
+2023/08/13 10:34:19 [notice] 1#1: worker process 34 exited with code 0
+2023/08/13 10:34:19 [notice] 1#1: signal 29 (SIGIO) received
+2023/08/13 10:34:19 [notice] 1#1: signal 17 (SIGCHLD) received from 30

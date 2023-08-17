@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+    microservice_a:
+        container_name: microserviceA
+        build:
+            context: ./php
+            args:
+                - PUID=${PUID}
+                - PGID=${PGID}
+                - INSTALL_XDEBUG=${INSTALL_XDEBUG}
+        volumes:
+            - ./../:/var/www/microserviceA
+        networks:
+            microservices:
+                aliases:
+                    - microserviceA
+        restart: always
+
+networks:
+    microservices:
+        external: true
+
+# volumes:
+#     db_data:
+
+    # postgres:
+    #     build:
+    #       context: ./docker/postgres
+    #     container_name: postgres
+    #     restart: always
+    #     environment:
+    #         - POSTGRES_DB=${POSTGRES_DB}
+    #         - POSTGRES_USER=${POSTGRES_USER}
+    #         - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    #     ports:
+    #         - ${POSTGRES_HOST_PORT}:${POSTGRES_CONTAINER_PORT}
+    #     volumes:
+    #         - db_data:/var/lib/postgresql/data:rw
