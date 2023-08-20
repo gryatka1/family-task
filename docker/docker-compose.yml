@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-    microservice_a:
-        container_name: microserviceA
+    family-task-php:
+        container_name: family-task-php
         build:
             context: ./php
             args:
@@ -10,15 +10,15 @@ services:
                 - PGID=${PGID}
                 - INSTALL_XDEBUG=${INSTALL_XDEBUG}
         volumes:
-            - ./../:/var/www/microserviceA
+            - ./../:/var/www/family-task
         networks:
-            microservices:
+            family:
                 aliases:
-                    - microserviceA
+                    - family-task-php
         restart: always
 
 networks:
-    microservices:
+    family:
         external: true
 
 # volumes:
