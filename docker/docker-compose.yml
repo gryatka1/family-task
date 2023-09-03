@@ -16,24 +16,31 @@ services:
                 aliases:
                     - family-task-php
         restart: always
+        environment:
+            PHP_IDE_CONFIG: "serverName=Docker"
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+
+    family-task-db:
+        container_name: family-task-db
+        image: postgres:15.4-alpine
+        environment:
+            - POSTGRES_DB=${POSTGRES_DB}
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+        ports:
+            - ${POSTGRES_PORT}:5432
+        volumes:
+            - db_data:/var/lib/postgresql/data:rw
+        networks:
+            family:
+                aliases:
+                    - family-task-db
+        restart: always
 
 networks:
     family:
         external: true
 
-# volumes:
-#     db_data:
-
-    # postgres:
-    #     build:
-    #       context: ./docker/postgres
-    #     container_name: postgres
-    #     restart: always
-    #     environment:
-    #         - POSTGRES_DB=${POSTGRES_DB}
-    #         - POSTGRES_USER=${POSTGRES_USER}
-    #         - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    #     ports:
-    #         - ${POSTGRES_HOST_PORT}:${POSTGRES_CONTAINER_PORT}
-    #     volumes:
-    #         - db_data:/var/lib/postgresql/data:rw
+volumes:
+    db_data:

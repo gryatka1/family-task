@@ -2,28 +2,63 @@
 
 namespace App\Controller;
 
+use App\Entity\Task;
+use App\Service\TaskService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Requirement\Requirement;
 
-#[Route('/family-task', name: 'app_task')]
+#[Route('/api/v1/family-task/task', name: 'task_')]
 class TaskController extends AbstractController
 {
-    #[Route('/', name: 'task_index')]
-    public function index(): JsonResponse
+    public function __construct(
+        private readonly TaskService $taskService
+    )
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/TaskController.php',
-        ]);
     }
 
-    #[Route('/test', name: 'task_index2')]
-    public function index2(): JsonResponse
+    #[Route('/create', name: 'create', methods: Request::METHOD_PUT)]
+    public function createTask(Request $request): JsonResponse
     {
-        return $this->json([
-            'message' => 'test2',
-            'path' => 'src/Controller/TaskController.php',
-        ]);
+        return new JsonResponse($this->taskService->createTask($request), Response::HTTP_CREATED);
+    }
+
+    #[Route('/update/text/{id}', name: 'update-text', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_PUT)]
+    public function updateTaskText(Task $task, Request $request): JsonResponse
+    {
+        $this->taskService->updateTaskText($task, $request);
+        return new JsonResponse([
+            'message' => 'success'
+        ], Response::HTTP_OK);
+    }
+
+    #[Route('/update/group/{id}', name: 'update-group', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_PUT)]
+    public function updateTaskGroup(Task $task, Request $request): JsonResponse
+    {
+        $this->taskService->updateTaskGroup($task, $request);
+        return new JsonResponse([
+            'message' => 'success'
+        ], Response::HTTP_OK);
+    }
+
+    #[Route('/done/{id}', name: 'done', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_PUT)]
+    public function doneTask(Task $task): JsonResponse
+    {
+        $this->taskService->doneTask($task);
+        return new JsonResponse([
+            'message' => 'success'
+        ], Response::HTTP_OK);
+    }
+
+    #[Route('/delete/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_DELETE)]
+    public function deleteTask(Task $task): JsonResponse
+    {
+        $this->taskService->removeTask($task);
+        return new JsonResponse([
+            'message' => 'success'
+        ], Response::HTTP_OK);
     }
 }
