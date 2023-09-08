@@ -2,10 +2,14 @@
 
 namespace App\DTO;
 
+use App\DTO\Traits\JsonSerializableTrait;
 use Doctrine\Common\Collections\Collection;
+use JsonSerializable;
 
-final class TaskGroupDTO
+final class TaskGroupDTO implements JsonSerializable
 {
+    use JsonSerializableTrait;
+
     public function __construct(
         private readonly int        $id,
         private readonly string     $title,

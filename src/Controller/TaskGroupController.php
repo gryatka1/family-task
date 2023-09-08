@@ -20,31 +20,30 @@ class TaskGroupController extends AbstractController
     {
     }
 
-    #[Route('/create', name: 'create', methods: Request::METHOD_PUT)]
+    #[Route('/create', name: 'create', methods: Request::METHOD_POST)]
     public function createTaskGroup(Request $request): JsonResponse
     {
-        return new JsonResponse($this->taskGroupService->createTaskGroup($request), Response::HTTP_CREATED);
+        return $this->json($this->taskGroupService->createTaskGroup($request), Response::HTTP_CREATED);
     }
 
     #[Route('/group/{id}', name: 'get-task-group', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_GET)]
     public function getTaskGroup(TaskGroup $taskGroup): JsonResponse
     {
-//        return $this->json($this->taskGroupService->getTaskGroup($taskGroup), Response::HTTP_OK);
-        return new JsonResponse($this->taskGroupService->getTaskGroup($taskGroup), Response::HTTP_OK);
+        return $this->json($this->taskGroupService->getTaskGroup($taskGroup), Response::HTTP_OK);
     }
 
     #[Route('/groups', name: 'get-task-groups', methods: Request::METHOD_GET)]
     public function getAllTaskGroups(): JsonResponse
     {
-        return new JsonResponse($this->taskGroupService->getAllTaskGroups(), Response::HTTP_OK);
+        return $this->json($this->taskGroupService->getAllTaskGroups(), Response::HTTP_OK);
     }
 
-    #[Route('/update-title/{id}', name: 'update-title', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_PUT)]
+    #[Route('/update-title/{id}', name: 'update-title', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_POST)]
     public function updateTaskGroupTitle(Request $request, TaskGroup $taskGroup): JsonResponse
     {
         $this->taskGroupService->updateTaskGroupTitle($request, $taskGroup);
 
-        return new JsonResponse([
+        return $this->json([
             'message' => 'success'
         ], Response::HTTP_OK);
     }
@@ -54,7 +53,7 @@ class TaskGroupController extends AbstractController
     {
         $this->taskGroupService->removeTaskGroup($taskGroup);
 
-        return new JsonResponse([
+        return $this->json([
             'message' => 'success'
         ], Response::HTTP_OK);
     }

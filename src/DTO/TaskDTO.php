@@ -2,15 +2,19 @@
 
 namespace App\DTO;
 
+use App\DTO\Traits\JsonSerializableTrait;
 use DateTimeImmutable;
+use JsonSerializable;
 
-final class TaskDTO
+final class TaskDTO implements JsonSerializable
 {
+    use JsonSerializableTrait;
+
     public function __construct(
         private readonly int               $id,
         private readonly string            $text,
         private readonly DateTimeImmutable $createdAt,
-        private readonly DateTimeImmutable $doneAt,
+        private readonly ?DateTimeImmutable $doneAt,
     )
     {
     }
@@ -30,7 +34,7 @@ final class TaskDTO
         return $this->createdAt;
     }
 
-    public function getDoneAt(): DateTimeImmutable
+    public function getDoneAt(): ?DateTimeImmutable
     {
         return $this->doneAt;
     }

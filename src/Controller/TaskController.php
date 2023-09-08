@@ -20,35 +20,35 @@ class TaskController extends AbstractController
     {
     }
 
-    #[Route('/create', name: 'create', methods: Request::METHOD_PUT)]
+    #[Route('/create', name: 'create', methods: Request::METHOD_POST)]
     public function createTask(Request $request): JsonResponse
     {
-        return new JsonResponse($this->taskService->createTask($request), Response::HTTP_CREATED);
+        return $this->json($this->taskService->createTask($request), Response::HTTP_CREATED);
     }
 
-    #[Route('/update/text/{id}', name: 'update-text', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_PUT)]
+    #[Route('/update/text/{id}', name: 'update-text', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_POST)]
     public function updateTaskText(Task $task, Request $request): JsonResponse
     {
         $this->taskService->updateTaskText($task, $request);
-        return new JsonResponse([
+        return $this->json([
             'message' => 'success'
         ], Response::HTTP_OK);
     }
 
-    #[Route('/update/group/{id}', name: 'update-group', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_PUT)]
+    #[Route('/update/group/{id}', name: 'update-group', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_POST)]
     public function updateTaskGroup(Task $task, Request $request): JsonResponse
     {
         $this->taskService->updateTaskGroup($task, $request);
-        return new JsonResponse([
+        return $this->json([
             'message' => 'success'
         ], Response::HTTP_OK);
     }
 
-    #[Route('/done/{id}', name: 'done', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_PUT)]
+    #[Route('/done/{id}', name: 'done', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_POST)]
     public function doneTask(Task $task): JsonResponse
     {
         $this->taskService->doneTask($task);
-        return new JsonResponse([
+        return $this->json([
             'message' => 'success'
         ], Response::HTTP_OK);
     }
@@ -57,7 +57,7 @@ class TaskController extends AbstractController
     public function deleteTask(Task $task): JsonResponse
     {
         $this->taskService->removeTask($task);
-        return new JsonResponse([
+        return $this->json([
             'message' => 'success'
         ], Response::HTTP_OK);
     }

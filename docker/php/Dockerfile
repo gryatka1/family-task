@@ -3,6 +3,8 @@ FROM php:8.2.0-fpm-alpine
 #COPY ./conf/php.ini /usr/local/etc/php/php.ini
 
 RUN apk add --no-cache curl git build-base zlib-dev oniguruma-dev autoconf icu-dev bash linux-headers
+RUN docker-php-ext-install opcache
+
 # Postgres
 RUN apk add --no-cache libpq-dev \
     && docker-php-ext-install pdo_pgsql
