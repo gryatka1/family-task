@@ -29,36 +29,24 @@ class TaskController extends AbstractController
     #[Route('/update/text/{id}', name: 'update-text', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_POST)]
     public function updateTaskText(Task $task, Request $request): JsonResponse
     {
-        $this->taskService->updateTaskText($task, $request);
-        return $this->json([
-            'message' => 'success'
-        ], Response::HTTP_OK);
+        return $this->json($this->taskService->updateTaskText($task, $request), Response::HTTP_OK);
     }
 
     #[Route('/update/group/{id}', name: 'update-group', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_POST)]
     public function updateTaskGroup(Task $task, Request $request): JsonResponse
     {
-        $this->taskService->updateTaskGroup($task, $request);
-        return $this->json([
-            'message' => 'success'
-        ], Response::HTTP_OK);
+        return $this->json($this->taskService->updateTaskGroup($task, $request), Response::HTTP_OK);
     }
 
     #[Route('/done/{id}', name: 'done', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_POST)]
     public function doneTask(Task $task): JsonResponse
     {
-        $this->taskService->doneTask($task);
-        return $this->json([
-            'message' => 'success'
-        ], Response::HTTP_OK);
+        return $this->json($this->taskService->doneTask($task), Response::HTTP_OK);
     }
 
     #[Route('/delete/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_DELETE)]
     public function deleteTask(Task $task): JsonResponse
     {
-        $this->taskService->removeTask($task);
-        return $this->json([
-            'message' => 'success'
-        ], Response::HTTP_OK);
+        return $this->json($this->taskService->removeTask($task), Response::HTTP_OK);
     }
 }

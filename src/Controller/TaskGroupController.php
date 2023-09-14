@@ -41,20 +41,12 @@ class TaskGroupController extends AbstractController
     #[Route('/update-title/{id}', name: 'update-title', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_POST)]
     public function updateTaskGroupTitle(Request $request, TaskGroup $taskGroup): JsonResponse
     {
-        $this->taskGroupService->updateTaskGroupTitle($request, $taskGroup);
-
-        return $this->json([
-            'message' => 'success'
-        ], Response::HTTP_OK);
+        return $this->json($this->taskGroupService->updateTaskGroupTitle($request, $taskGroup), Response::HTTP_OK);
     }
 
     #[Route('/delete/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_DELETE)]
     public function deleteTask(TaskGroup $taskGroup): JsonResponse
     {
-        $this->taskGroupService->removeTaskGroup($taskGroup);
-
-        return $this->json([
-            'message' => 'success'
-        ], Response::HTTP_OK);
+        return $this->json($this->taskGroupService->removeTaskGroup($taskGroup), Response::HTTP_OK);
     }
 }

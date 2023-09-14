@@ -34,31 +34,39 @@ class TaskService
         return new IdDTO(id: $task->getId());
     }
 
-    public function updateTaskText(Task $task, Request $request): void
+    public function updateTaskText(Task $task, Request $request): IdDTO
     {
         $task->setText($request->get('text'));
 
         $this->entityManager->flush();
+
+        return new IdDTO(id: $task->getId());
     }
 
-    public function updateTaskGroup(Task $task, Request $request): void
+    public function updateTaskGroup(Task $task, Request $request): IdDTO
     {
         $task->setTaskGroup($this->taskGroupRepository->find($request->get('taskGroupId')));
 
         $this->entityManager->flush();
+
+        return new IdDTO(id: $task->getId());
     }
 
-    public function doneTask(Task $task): void
+    public function doneTask(Task $task): IdDTO
     {
         $task->setDoneAt(new DateTimeImmutable());
 
         $this->entityManager->flush();
+
+        return new IdDTO(id: $task->getId());
     }
 
-    public function removeTask(Task $task): void
+    public function removeTask(Task $task): IdDTO
     {
         $task->setDeletedAt(new DateTimeImmutable());
 
         $this->entityManager->flush();
+
+        return new IdDTO(id: $task->getId());
     }
 }

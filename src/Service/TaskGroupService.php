@@ -71,17 +71,21 @@ class TaskGroupService
         );
     }
 
-    public function updateTaskGroupTitle(Request $request, TaskGroup $taskGroup): void
+    public function updateTaskGroupTitle(Request $request, TaskGroup $taskGroup): IdDTO
     {
         $taskGroup->setTitle($request->get('title'));
 
         $this->entityManager->flush();
+
+        return new IdDTO(id: $taskGroup->getId());
     }
 
-    public function removeTaskGroup(TaskGroup $taskGroup): void
+    public function removeTaskGroup(TaskGroup $taskGroup): IdDTO
     {
         $taskGroup->setDeletedAt(new DateTimeImmutable());
 
         $this->entityManager->flush();
+
+        return new IdDTO(id: $taskGroup->getId());
     }
 }
