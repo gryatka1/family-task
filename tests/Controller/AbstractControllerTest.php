@@ -32,4 +32,32 @@ abstract class AbstractControllerTest extends WebTestCase
 
         parent::tearDown();
     }
+
+    protected function saveEntities(object ...$entities): void
+    {
+        foreach ($entities as $entity) {
+            $this->entityManager->persist($entity);
+        }
+
+        $this->entityManager->flush();
+    }
+
+    protected function deleteEntities(object ...$entities): void
+    {
+        foreach ($entities as $entity) {
+            $this->entityManager->remove($entity);
+        }
+
+        $this->entityManager->flush();
+    }
+
+    protected function findTaskById(string $id): ?Task
+    {
+        return $this->taskRepository->find($id);
+    }
+
+    protected function assertIdDTO(array $responseContent): void
+    {
+        $this->assertArrayHasKey('id', $responseContent);
+    }
 }
