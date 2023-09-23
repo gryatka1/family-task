@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Trait;
 use App\Repository\TaskGroupRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -27,6 +28,7 @@ class TaskGroup
 
     public function __construct()
     {
+        $this->createdAt = new DateTimeImmutable();
         $this->tasks = new ArrayCollection();
     }
 
