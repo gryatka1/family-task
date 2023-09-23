@@ -26,10 +26,12 @@ class TaskGroup
     #[ORM\OneToMany(mappedBy: 'taskGroup', targetEntity: Task::class)]
     private Collection $tasks;
 
-    public function __construct()
+    public function __construct($title)
     {
         $this->createdAt = new DateTimeImmutable();
         $this->tasks = new ArrayCollection();
+
+        $this->title = $title;
     }
 
     public function getId(): int

@@ -16,7 +16,7 @@ class TaskTest extends AbstractControllerTest
         $taskGroupTitle = 'testCreateTask';
         $taskText = 'testCreateTask';
 
-        $taskGroup = (new TaskGroup())->setTitle($taskGroupTitle);
+        $taskGroup = (new TaskGroup(title: $taskGroupTitle));
 
         $this->entityManager->persist($taskGroup);
 
@@ -56,8 +56,8 @@ class TaskTest extends AbstractControllerTest
         $taskText = 'testUpdateTextTask';
         $newTaskText = 'updated testUpdateTextTask';
 
-        $taskGroup = (new TaskGroup())->setTitle($taskGroupTitle);
-        $task = (new Task())->setText($taskText)->setTaskGroup($taskGroup);
+        $taskGroup = (new TaskGroup(title: $taskGroupTitle));
+        $task = (new Task(text: $taskText, taskGroup: $taskGroup));
 
         $this->entityManager->persist($taskGroup);
         $this->entityManager->persist($task);
@@ -93,10 +93,10 @@ class TaskTest extends AbstractControllerTest
         $taskText = 'testUpdateTaskGroupTask';
         $newTaskGroupTitle = 'updated testUpdateTaskGroupTask';
 
-        $taskGroup = (new TaskGroup())->setTitle($taskGroupTitle);
-        $task = (new Task())->setText($taskText)->setTaskGroup($taskGroup);
+        $taskGroup = (new TaskGroup(title: $taskGroupTitle));
+        $task = (new Task(text: $taskText, taskGroup: $taskGroup));
 
-        $newTaskGroup = (new TaskGroup())->setTitle($newTaskGroupTitle);
+        $newTaskGroup = (new TaskGroup(title: $newTaskGroupTitle));
 
         $this->entityManager->persist($taskGroup);
         $this->entityManager->persist($task);
@@ -136,8 +136,8 @@ class TaskTest extends AbstractControllerTest
         $taskGroupTitle = 'testDone';
         $taskText = 'testDone';
 
-        $taskGroup = (new TaskGroup())->setTitle($taskGroupTitle);
-        $task = (new Task())->setText($taskText)->setTaskGroup($taskGroup);
+        $taskGroup = (new TaskGroup(title: $taskGroupTitle));
+        $task = (new Task(text: $taskText, taskGroup: $taskGroup));
 
         $this->entityManager->persist($taskGroup);
         $this->entityManager->persist($task);
@@ -170,8 +170,8 @@ class TaskTest extends AbstractControllerTest
         $taskGroupTitle = 'testDelete';
         $taskText = 'testDelete';
 
-        $taskGroup = (new TaskGroup())->setTitle($taskGroupTitle);
-        $task = (new Task())->setText($taskText)->setTaskGroup($taskGroup);
+        $taskGroup = (new TaskGroup(title: $taskGroupTitle));
+        $task = (new Task(text: $taskText, taskGroup: $taskGroup));
 
         $this->entityManager->persist($taskGroup);
         $this->entityManager->persist($task);
