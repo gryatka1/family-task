@@ -65,8 +65,36 @@ abstract class AbstractController extends WebTestCase
         return $this->taskGroupRepository->find($id);
     }
 
-    protected function assertIdDTO(array $responseContent): void
+    protected function assertTaskDTO(array $responseContent): void
     {
         $this->assertArrayHasKey('id', $responseContent);
+        $this->assertArrayHasKey('text', $responseContent);
+        $this->assertArrayHasKey('createdAt', $responseContent);
+        $this->assertArrayHasKey('taskGroupId', $responseContent);
+        $this->assertArrayHasKey('doneAt', $responseContent);
+        $this->assertArrayHasKey('deletedAt', $responseContent);
+
+        $this->assertIsInt($responseContent['id']);
+        $this->assertIsString($responseContent['text']);
+        $this->assertIsString($responseContent['createdAt']);
+        $this->assertIsInt($responseContent['taskGroupId']);
+    }
+
+    protected function assertTaskGroupDTO(array $responseContent): void
+    {
+        $this->assertArrayHasKey('id', $responseContent);
+        $this->assertArrayHasKey('title', $responseContent);
+        $this->assertArrayHasKey('tasks', $responseContent);
+        $this->assertArrayHasKey('createdAt', $responseContent);
+        $this->assertArrayHasKey('deletedAt', $responseContent);
+
+        $this->assertIsInt($responseContent['id']);
+        $this->assertIsString($responseContent['title']);
+        $this->assertIsString($responseContent['createdAt']);
+        $this->assertIsArray($responseContent['tasks']);
+
+        foreach ($responseContent['tasks'] as $task) {
+            $this->assertTaskDTO($task);
+        }
     }
 }

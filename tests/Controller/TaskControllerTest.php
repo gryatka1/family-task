@@ -33,16 +33,10 @@ class TaskControllerTest extends AbstractController
         $responseContent = json_decode($response->getContent(), true);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_CREATED);
-        $this->assertIdDTO($responseContent);
+        $this->assertTaskDTO($responseContent);
+        $this->isActiveTask($responseContent);
 
         $taskBD = $this->findTaskById($responseContent['id']);
-
-        $this->assertEquals(Task::class, get_class($taskBD));
-        $this->assertEquals(self::TASK_TEXT, $taskBD->getText());
-        $taskGroupBD = $taskBD->getTaskGroup();
-        $this->assertEquals($taskGroup->getId(), $taskGroupBD->getId());
-        $this->assertEquals(self::TASK_GROUP_TITLE, $taskGroupBD->getTitle());
-        $this->assertEquals(1, $taskGroupBD->getTasks()->count());
 
         $this->deleteEntities($taskBD, $taskGroup);
     }
@@ -65,11 +59,10 @@ class TaskControllerTest extends AbstractController
         $responseContent = json_decode($response->getContent(), true);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-        $this->assertIdDTO($responseContent);
+        $this->assertTaskDTO($responseContent);
 
-        $task = $this->findTaskById($responseContent['id']);
-
-        $this->assertEquals(self::NEW_TASK_TEXT, $task->getText());
+        $this->assertEquals(self::NEW_TASK_TEXT, $responseContent['text']);
+        $this->isActiveTask($responseContent);
 
         $this->deleteEntities($task, $taskGroup);
     }
@@ -94,15 +87,11 @@ class TaskControllerTest extends AbstractController
         $responseContent = json_decode($response->getContent(), true);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-        $this->assertIdDTO($responseContent);
+        $this->assertTaskDTO($responseContent);
 
-        $task = $this->findTaskById($responseContent['id']);
-
-        $taskGroupBD = $task->getTaskGroup();
-        $this->assertEquals($newTaskGroup->getId(), $taskGroupBD->getId());
-        $this->assertEquals(self::NEW_TASK_GROUP_TITLE, $taskGroupBD->getTitle());
         $this->assertEquals(0, $taskGroup->getTasks()->count());
-        $this->assertEquals(1, $taskGroupBD->getTasks()->count());
+        $this->assertEquals($newTaskGroup->getId(), $responseContent['taskGroupId']);
+        $this->isActiveTask($responseContent);
 
         $this->deleteEntities($task, $taskGroup, $newTaskGroup);
     }
@@ -123,11 +112,10 @@ class TaskControllerTest extends AbstractController
         $responseContent = json_decode($response->getContent(), true);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-        $this->assertIdDTO($responseContent);
+        $this->assertTaskDTO($responseContent);
 
-        $task = $this->findTaskById($responseContent['id']);
-
-        $this->assertNotNull($task->getDoneAt());
+        $this->assertNotNull($responseContent['doneAt']);
+        $this->assertNull($responseContent['deletedAt']);
 
         $this->deleteEntities($task, $taskGroup);
     }
@@ -148,12 +136,16 @@ class TaskControllerTest extends AbstractController
         $responseContent = json_decode($response->getContent(), true);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-        $this->assertIdDTO($responseContent);
+        $this->assertTaskDTO($responseContent);
 
-        $task = $this->findTaskById($responseContent['id']);
-
-        $this->assertNotNull($task->getDeletedAt());
+        $this->assertNotNull($responseContent['deletedAt']);
 
         $this->deleteEntities($task, $taskGroup);
+    }
+
+    protected function isActiveTask(array $responseContent): void
+    {
+        $this->assertNull($responseContent['doneAt']);
+        $this->assertNull($responseContent['deletedAt']);
     }
 }

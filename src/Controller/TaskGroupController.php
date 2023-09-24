@@ -29,7 +29,7 @@ class TaskGroupController extends AbstractController
     #[Route('/group/{id}', name: 'get-task-group', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_GET)]
     public function getTaskGroup(TaskGroup $taskGroup): JsonResponse
     {
-        return $this->json($this->taskGroupService->getTaskGroup($taskGroup), Response::HTTP_OK);
+        return $this->json($this->taskGroupService->getTaskGroupDTO($taskGroup), Response::HTTP_OK);
     }
 
     #[Route('/groups', name: 'get-task-groups', methods: Request::METHOD_GET)]

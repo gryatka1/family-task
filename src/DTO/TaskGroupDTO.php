@@ -3,6 +3,7 @@
 namespace App\DTO;
 
 use App\DTO\Traits\JsonSerializableTrait;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\Collection;
 use JsonSerializable;
 
@@ -14,6 +15,8 @@ final class TaskGroupDTO implements JsonSerializable
         private readonly int        $id,
         private readonly string     $title,
         private readonly Collection $tasks,
+        private readonly DateTimeImmutable $createdAt,
+        private readonly ?DateTimeImmutable $deletedAt,
     )
     {
     }

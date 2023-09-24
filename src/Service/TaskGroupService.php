@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-use App\DTO\IdDTO;
 use App\DTO\TaskDTO;
 use App\DTO\TaskGroupDTO;
 use App\Entity\TaskGroup;
@@ -24,16 +23,17 @@ class TaskGroupService
         $this->taskGroupRepository = $this->entityManager->getRepository(TaskGroup::class);
     }
 
-    public function createTaskGroup(Request $request): IdDTO
+    public function createTaskGroup(Request $request): TaskGroupDTO
     {
         $taskGroup = (new TaskGroup(title: $request->get('title')));
 
         $this->entityManager->persist($taskGroup);
         $this->entityManager->flush();
 
-        return new IdDTO(id: $taskGroup->getId());
+        return $this->getTaskGroupDTO($taskGroup);
     }
 
+    /** @return ArrayCollection<TaskGroupDTO> */
     public function getAllTaskGroups(): ArrayCollection
     {
         $taskGroupsCollection = new ArrayCollection();
@@ -41,14 +41,14 @@ class TaskGroupService
         $taskGroups = $this->taskGroupRepository->findAll();
 
         foreach ($taskGroups as $taskGroup) {
-            $taskGroupDTO = $this->getTaskGroup($taskGroup);
+            $taskGroupDTO = $this->getTaskGroupDTO($taskGroup);
             $taskGroupsCollection->add($taskGroupDTO);
         }
 
         return $taskGroupsCollection;
     }
 
-    public function getTaskGroup(TaskGroup $taskGroup): TaskGroupDTO
+    public function getTaskGroupDTO(TaskGroup $taskGroup): TaskGroupDTO
     {
         $taskDTOCollection = new ArrayCollection();
 
@@ -57,7 +57,9 @@ class TaskGroupService
                 id: $task->getId(),
                 text: $task->getText(),
                 createdAt: $task->getCreatedAt(),
-                doneAt: $task->getDoneAt()
+                taskGroupId: $taskGroup->getId(),
+                doneAt: $task->getDoneAt(),
+                deletedAt: $task->getDeletedAt()
             );
 
             $taskDTOCollection->add($taskDTO);
@@ -66,25 +68,31 @@ class TaskGroupService
         return new TaskGroupDTO(
             id: $taskGroup->getId(),
             title: $taskGroup->getTitle(),
-            tasks: $taskDTOCollection
+            tasks: $taskDTOCollection,
+            createdAt: $taskGroup->getCreatedAt(),
+            deletedAt: $taskGroup->getDeletedAt()
         );
     }
 
-    public function updateTaskGroupTitle(Request $request, TaskGroup $taskGroup): IdDTO
+    public function updateTaskGroupTitle(Request $request, TaskGroup $taskGroup): TaskGroupDTO
     {
         $taskGroup->setTitle($request->get('title'));
 
         $this->entityManager->flush();
 
-        return new IdDTO(id: $taskGroup->getId());
+        return $this->getTaskGroupDTO($taskGroup);
     }
 
-    public function removeTaskGroup(TaskGroup $taskGroup): IdDTO
+    public function removeTaskGroup(TaskGroup $taskGroup): TaskGroupDTO
     {
         $taskGroup->setDeletedAt(new DateTimeImmutable());
 
+        foreach ($taskGroup->getTasks() as $task) {
+            $task->setDeletedAt(new DateTimeImmutable());
+        }
+
         $this->entityManager->flush();
 
-        return new IdDTO(id: $taskGroup->getId());
+        return $this->getTaskGroupDTO($taskGroup);
     }
 }

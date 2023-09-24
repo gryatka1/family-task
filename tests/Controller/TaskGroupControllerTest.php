@@ -28,12 +28,10 @@ class TaskGroupControllerTest extends AbstractController
         $responseContent = json_decode($response->getContent(), true);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_CREATED);
-        $this->assertIdDTO($responseContent);
+        $this->assertTaskGroupDTO($responseContent);
+        $this->assertNull($responseContent['deletedAt']);
 
         $taskGroupBD = $this->findTaskGroupById($responseContent['id']);
-
-        $this->assertEquals(TaskGroup::class, get_class($taskGroupBD));
-        $this->assertEquals(self::TASK_GROUP_TITLE, $taskGroupBD->getTitle());
 
         $this->deleteEntities($taskGroupBD);
     }
@@ -56,11 +54,9 @@ class TaskGroupControllerTest extends AbstractController
         $responseContent = json_decode($response->getContent(), true);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-//        $this->assertIdDTO($responseContent);
-//
-//        $task = $this->findTaskById($responseContent['id']);
-//
-//        $this->assertEquals(self::NEW_TASK_TEXT, $task->getText());
+
+        $this->assertTaskGroupDTO($responseContent);
+        $this->assertNull($responseContent['deletedAt']);
 
         $this->deleteEntities($task1, $task2, $taskGroup);
     }
@@ -85,13 +81,11 @@ class TaskGroupControllerTest extends AbstractController
         $responseContent = json_decode($response->getContent(), true);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-//        $this->assertIdDTO($responseContent);
-//
-//        $task = $this->findTaskById($responseContent['id']);
-//
-//        $taskGroupBD = $task->getTaskGroup();
-//        $this->assertEquals($newTaskGroup->getId(), $taskGroupBD->getId());
-//        $this->assertEquals(self::NEW_TASK_GROUP_TITLE, $taskGroupBD->getTitle());
+
+        $this->assertIsArray($responseContent);
+        foreach ($responseContent as $taskGroupDTO) {
+            $this->assertTaskGroupDTO($taskGroupDTO);
+        }
 
         $this->deleteEntities($task, $newTask, $taskGroup, $newTaskGroup);
     }
@@ -112,11 +106,10 @@ class TaskGroupControllerTest extends AbstractController
         $responseContent = json_decode($response->getContent(), true);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-        $this->assertIdDTO($responseContent);
 
-        $taskGroupBD = $this->findTaskGroupById($responseContent['id']);
-
-        $this->assertEquals(self::NEW_TASK_GROUP_TITLE, $taskGroupBD->getTitle());
+        $this->assertTaskGroupDTO($responseContent);
+        $this->assertNull($responseContent['deletedAt']);
+        $this->assertEquals(self::NEW_TASK_GROUP_TITLE, $responseContent['title']);
 
         $this->deleteEntities($taskGroup);
     }
@@ -135,11 +128,9 @@ class TaskGroupControllerTest extends AbstractController
         $responseContent = json_decode($response->getContent(), true);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-        $this->assertIdDTO($responseContent);
 
-        $taskGroupBD = $this->findTaskGroupById($responseContent['id']);
-
-        $this->assertNotNull($taskGroupBD->getDeletedAt());
+        $this->assertTaskGroupDTO($responseContent);
+        $this->assertNotNull($responseContent['deletedAt']);
 
         $this->deleteEntities($taskGroup);
     }
