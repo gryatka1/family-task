@@ -26,8 +26,7 @@ class TaskGroupService
 
     public function createTaskGroup(Request $request): IdDTO
     {
-        $taskGroup = (new TaskGroup())
-            ->setTitle($request->get('title'));
+        $taskGroup = (new TaskGroup(title: $request->get('title')));
 
         $this->entityManager->persist($taskGroup);
         $this->entityManager->flush();

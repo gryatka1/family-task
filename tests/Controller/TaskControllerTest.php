@@ -7,7 +7,7 @@ use App\Entity\TaskGroup;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class TaskTest extends AbstractControllerTest
+class TaskControllerTest extends AbstractController
 {
     const APP_ROUTE = self::BASE_APP_ROUTE . '/task';
 
@@ -16,7 +16,7 @@ class TaskTest extends AbstractControllerTest
     const NEW_TASK_GROUP_TITLE = 'unittest updated task group title';
     const NEW_TASK_TEXT = 'unittest updated task text';
 
-    public function testCreate(): void
+    public function testCreateTask(): void
     {
         $taskGroup = (new TaskGroup(title: self::TASK_GROUP_TITLE));
 
@@ -46,7 +46,7 @@ class TaskTest extends AbstractControllerTest
         $this->deleteEntities($task, $taskGroup);
     }
 
-    public function testUpdateText(): void
+    public function testUpdateTaskText(): void
     {
         $taskGroup = (new TaskGroup(title: self::TASK_GROUP_TITLE));
         $task = (new Task(text: self::TASK_TEXT, taskGroup: $taskGroup));
@@ -81,8 +81,6 @@ class TaskTest extends AbstractControllerTest
 
         $this->saveEntities($taskGroup, $task, $newTaskGroup);
 
-        $this->entityManager->flush();
-
         $this->client->request(Request::METHOD_POST, self::APP_ROUTE . '/update/group/' . $task->getId(), [
             'taskGroupId' => $newTaskGroup->getId(),
         ]);
@@ -104,7 +102,7 @@ class TaskTest extends AbstractControllerTest
         $this->deleteEntities($task, $taskGroup, $newTaskGroup);
     }
 
-    public function testDone(): void
+    public function testDoneTask(): void
     {
         $taskGroup = (new TaskGroup(title: self::TASK_GROUP_TITLE));
         $task = (new Task(text: self::TASK_TEXT, taskGroup: $taskGroup));
@@ -128,7 +126,7 @@ class TaskTest extends AbstractControllerTest
         $this->deleteEntities($task, $taskGroup);
     }
 
-    public function testDelete(): void
+    public function testDeleteTask(): void
     {
         $taskGroup = (new TaskGroup(title: self::TASK_GROUP_TITLE));
         $task = (new Task(text: self::TASK_TEXT, taskGroup: $taskGroup));

@@ -3,18 +3,20 @@
 namespace App\Tests\Controller;
 
 use App\Entity\Task;
+use App\Entity\TaskGroup;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-abstract class AbstractControllerTest extends WebTestCase
+abstract class AbstractController extends WebTestCase
 {
     const BASE_APP_ROUTE = '/api/v1/family-task';
 
     protected KernelBrowser $client;
     protected ?EntityManagerInterface $entityManager;
     protected ?EntityRepository $taskRepository;
+    protected ?EntityRepository $taskGroupRepository;
 
     protected function setUp(): void
     {
@@ -22,6 +24,7 @@ abstract class AbstractControllerTest extends WebTestCase
 
         $this->entityManager = $this->client->getContainer()->get('doctrine.orm.entity_manager');
         $this->taskRepository = $this->entityManager->getRepository(Task::class);
+        $this->taskGroupRepository = $this->entityManager->getRepository(TaskGroup::class);
     }
 
     protected function tearDown(): void
@@ -29,6 +32,7 @@ abstract class AbstractControllerTest extends WebTestCase
         $this->entityManager->close();
         $this->entityManager = null;
         $this->taskRepository = null;
+        $this->taskGroupRepository = null;
 
         parent::tearDown();
     }
@@ -54,6 +58,11 @@ abstract class AbstractControllerTest extends WebTestCase
     protected function findTaskById(string $id): ?Task
     {
         return $this->taskRepository->find($id);
+    }
+
+    protected function findTaskGroupById(string $id): ?TaskGroup
+    {
+        return $this->taskGroupRepository->find($id);
     }
 
     protected function assertIdDTO(array $responseContent): void
