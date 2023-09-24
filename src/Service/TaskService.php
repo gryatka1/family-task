@@ -24,7 +24,9 @@ class TaskService
 
     public function createTask(Request $request): IdDTO
     {
-        $task = (new Task(text: $request->get('text'), taskGroup: $this->taskGroupRepository->find($request->get('taskGroupId'))));
+        $taskGroup = $this->taskGroupRepository->find($request->get('taskGroupId'));
+        $task = (new Task(text: $request->get('text')));
+        $taskGroup->addTask($task);
 
         $this->entityManager->persist($task);
         $this->entityManager->flush();
@@ -43,7 +45,8 @@ class TaskService
 
     public function updateTaskGroup(Task $task, Request $request): IdDTO
     {
-        $task->setTaskGroup($this->taskGroupRepository->find($request->get('taskGroupId')));
+        $taskGroup = $this->taskGroupRepository->find($request->get('taskGroupId'));
+        $taskGroup->addTask($task);
 
         $this->entityManager->flush();
 

@@ -25,14 +25,13 @@ class Task
     private ?DateTimeImmutable $doneAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'tasks')]
-    private TaskGroup $taskGroup;
+    private ?TaskGroup $taskGroup = null;
 
-    public function __construct(string $text, TaskGroup $taskGroup)
+    public function __construct(string $text)
     {
         $this->createdAt = new DateTimeImmutable();
 
         $this->text = $text;
-        $this->taskGroup = $taskGroup;
     }
 
     public function getId(): int
@@ -64,12 +63,12 @@ class Task
         return $this;
     }
 
-    public function getTaskGroup(): TaskGroup
+    public function getTaskGroup(): ?TaskGroup
     {
         return $this->taskGroup;
     }
 
-    public function setTaskGroup(TaskGroup $taskGroup): static
+    public function setTaskGroup(?TaskGroup $taskGroup): static
     {
         $this->taskGroup = $taskGroup;
 

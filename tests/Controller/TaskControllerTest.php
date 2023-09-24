@@ -35,23 +35,25 @@ class TaskControllerTest extends AbstractController
         $this->assertResponseStatusCodeSame(Response::HTTP_CREATED);
         $this->assertIdDTO($responseContent);
 
-        $task = $this->findTaskById($responseContent['id']);
+        $taskBD = $this->findTaskById($responseContent['id']);
 
-        $this->assertEquals(Task::class, get_class($task));
-        $this->assertEquals(self::TASK_TEXT, $task->getText());
-        $taskGroupBD = $task->getTaskGroup();
+        $this->assertEquals(Task::class, get_class($taskBD));
+        $this->assertEquals(self::TASK_TEXT, $taskBD->getText());
+        $taskGroupBD = $taskBD->getTaskGroup();
         $this->assertEquals($taskGroup->getId(), $taskGroupBD->getId());
         $this->assertEquals(self::TASK_GROUP_TITLE, $taskGroupBD->getTitle());
+        $this->assertEquals(1, $taskGroupBD->getTasks()->count());
 
-        $this->deleteEntities($task, $taskGroup);
+        $this->deleteEntities($taskBD, $taskGroup);
     }
 
     public function testUpdateTaskText(): void
     {
         $taskGroup = (new TaskGroup(title: self::TASK_GROUP_TITLE));
-        $task = (new Task(text: self::TASK_TEXT, taskGroup: $taskGroup));
+        $task = (new Task(text: self::TASK_TEXT));
+        $taskGroup->addTask($task);
 
-        $this->saveEntities($taskGroup, $task);
+        $this->saveEntities($task, $taskGroup);
 
         $this->client->request(Request::METHOD_POST, self::APP_ROUTE . '/update/text/' . $task->getId(), [
             'text' => self::NEW_TASK_TEXT,
@@ -75,11 +77,12 @@ class TaskControllerTest extends AbstractController
     public function testUpdateTaskGroup(): void
     {
         $taskGroup = (new TaskGroup(title: self::TASK_GROUP_TITLE));
-        $task = (new Task(text: self::TASK_TEXT, taskGroup: $taskGroup));
+        $task = (new Task(text: self::TASK_TEXT));
+        $taskGroup->addTask($task);
 
         $newTaskGroup = (new TaskGroup(title: self::NEW_TASK_GROUP_TITLE));
 
-        $this->saveEntities($taskGroup, $task, $newTaskGroup);
+        $this->saveEntities($task, $taskGroup, $newTaskGroup);
 
         $this->client->request(Request::METHOD_POST, self::APP_ROUTE . '/update/group/' . $task->getId(), [
             'taskGroupId' => $newTaskGroup->getId(),
@@ -98,6 +101,8 @@ class TaskControllerTest extends AbstractController
         $taskGroupBD = $task->getTaskGroup();
         $this->assertEquals($newTaskGroup->getId(), $taskGroupBD->getId());
         $this->assertEquals(self::NEW_TASK_GROUP_TITLE, $taskGroupBD->getTitle());
+        $this->assertEquals(0, $taskGroup->getTasks()->count());
+        $this->assertEquals(1, $taskGroupBD->getTasks()->count());
 
         $this->deleteEntities($task, $taskGroup, $newTaskGroup);
     }
@@ -105,9 +110,10 @@ class TaskControllerTest extends AbstractController
     public function testDoneTask(): void
     {
         $taskGroup = (new TaskGroup(title: self::TASK_GROUP_TITLE));
-        $task = (new Task(text: self::TASK_TEXT, taskGroup: $taskGroup));
+        $task = (new Task(text: self::TASK_TEXT));
+        $taskGroup->addTask($task);
 
-        $this->saveEntities($taskGroup, $task);
+        $this->saveEntities($task, $taskGroup);
 
         $this->client->request(Request::METHOD_POST, self::APP_ROUTE . '/done/' . $task->getId());
 
@@ -129,9 +135,10 @@ class TaskControllerTest extends AbstractController
     public function testDeleteTask(): void
     {
         $taskGroup = (new TaskGroup(title: self::TASK_GROUP_TITLE));
-        $task = (new Task(text: self::TASK_TEXT, taskGroup: $taskGroup));
+        $task = (new Task(text: self::TASK_TEXT));
+        $taskGroup->addTask($task);
 
-        $this->saveEntities($taskGroup, $task);
+        $this->saveEntities($task, $taskGroup);
 
         $this->client->request(Request::METHOD_DELETE, self::APP_ROUTE . '/delete/' . $task->getId());
 

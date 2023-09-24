@@ -63,6 +63,7 @@ class TaskGroup
     {
         if (!$this->tasks->contains($task)) {
             $this->tasks->add($task);
+            $task->getTaskGroup()?->removeTask($task);
             $task->setTaskGroup($this);
         }
 

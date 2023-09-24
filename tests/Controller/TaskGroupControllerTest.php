@@ -41,10 +41,12 @@ class TaskGroupControllerTest extends AbstractController
     public function testGetTaskGroup(): void
     {
         $taskGroup = (new TaskGroup(title: self::TASK_GROUP_TITLE));
-        $task1 = (new Task(text: self::TASK_TEXT, taskGroup: $taskGroup));
-        $task2 = (new Task(text: self::NEW_TASK_TEXT, taskGroup: $taskGroup));
+        $task1 = (new Task(text: self::TASK_TEXT));
+        $taskGroup->addTask($task1);
+        $task2 = (new Task(text: self::NEW_TASK_TEXT));
+        $taskGroup->addTask($task2);
 
-        $this->saveEntities($taskGroup, $task1, $task2);
+        $this->saveEntities($task1, $task2, $taskGroup);
 
         $this->client->request(Request::METHOD_GET, self::APP_ROUTE . '/group/' . $taskGroup->getId());
 
@@ -66,12 +68,14 @@ class TaskGroupControllerTest extends AbstractController
     public function testGetAllTaskGroups(): void
     {
         $taskGroup = (new TaskGroup(title: self::TASK_GROUP_TITLE));
-        $task = (new Task(text: self::TASK_TEXT, taskGroup: $taskGroup));
+        $task = (new Task(text: self::TASK_TEXT));
+        $taskGroup->addTask($task);
 
         $newTaskGroup = (new TaskGroup(title: self::NEW_TASK_GROUP_TITLE));
-        $newTask = (new Task(text: self::NEW_TASK_TEXT, taskGroup: $newTaskGroup));
+        $newTask = (new Task(text: self::NEW_TASK_TEXT));
+        $newTaskGroup->addTask($newTask);
 
-        $this->saveEntities($taskGroup, $task, $newTaskGroup, $newTask);
+        $this->saveEntities($task, $newTask, $taskGroup, $newTaskGroup);
 
         $this->client->request(Request::METHOD_GET, self::APP_ROUTE . '/groups');
 
@@ -89,7 +93,7 @@ class TaskGroupControllerTest extends AbstractController
 //        $this->assertEquals($newTaskGroup->getId(), $taskGroupBD->getId());
 //        $this->assertEquals(self::NEW_TASK_GROUP_TITLE, $taskGroupBD->getTitle());
 
-        $this->deleteEntities($task, $taskGroup, $newTask, $newTaskGroup);
+        $this->deleteEntities($task, $newTask, $taskGroup, $newTaskGroup);
     }
 
     public function testUpdateTaskGroupTitle(): void
