@@ -38,6 +38,12 @@ class TaskGroupController extends AbstractController
         return $this->json($this->taskGroupService->getAllTaskGroups(), Response::HTTP_OK);
     }
 
+    #[Route('/group-titles', name: 'get-task-group-titles', methods: Request::METHOD_GET)]
+    public function getAllTaskGroupTitles(): JsonResponse
+    {
+        return $this->json($this->taskGroupService->getAllTaskGroupTitles(), Response::HTTP_OK);
+    }
+
     #[Route('/update-title/{id}', name: 'update-title', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_POST)]
     public function updateTaskGroupTitle(Request $request, TaskGroup $taskGroup): JsonResponse
     {

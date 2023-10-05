@@ -34,17 +34,9 @@ class TaskService
         return $this->getTaskDTO($task, $taskGroup);
     }
 
-    public function updateTaskText(Task $task, Request $request): TaskDTO
+    public function updateTask(Task $task, Request $request): TaskDTO
     {
         $task->setText($request->get('text'));
-
-        $this->entityManager->flush();
-
-        return $this->getTaskDTO($task);
-    }
-
-    public function updateTaskGroup(Task $task, Request $request): TaskDTO
-    {
         $taskGroup = $this->taskGroupRepository->find($request->get('taskGroupId'));
         $taskGroup->addTask($task);
 

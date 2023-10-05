@@ -48,6 +48,16 @@ class TaskGroupService
         return $taskGroupsCollection;
     }
 
+    public function getAllTaskGroupTitles(): array
+    {
+        $taskGroups = $this->taskGroupRepository->findAll();
+
+        return array_reduce($taskGroups, function ($re, TaskGroup $taskGroup) {
+            $re[$taskGroup->getId()] = $taskGroup->getTitle();
+            return $re;
+        }, []);
+    }
+
     public function getTaskGroupDTO(TaskGroup $taskGroup): TaskGroupDTO
     {
         $taskDTOCollection = new ArrayCollection();

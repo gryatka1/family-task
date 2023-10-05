@@ -47,37 +47,12 @@ class TaskControllerTest extends AbstractController
         $task = (new Task(text: self::TASK_TEXT));
         $taskGroup->addTask($task);
 
-        $this->saveEntities($task, $taskGroup);
-
-        $this->client->request(Request::METHOD_POST, self::APP_ROUTE . '/update/text/' . $task->getId(), [
-            'text' => self::NEW_TASK_TEXT,
-        ]);
-
-        $this->assertResponseIsSuccessful();
-
-        $response = $this->client->getResponse();
-        $responseContent = json_decode($response->getContent(), true);
-
-        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-        $this->assertTaskDTO($responseContent);
-
-        $this->assertEquals(self::NEW_TASK_TEXT, $responseContent['text']);
-        $this->isActiveTask($responseContent);
-
-        $this->deleteEntities($task, $taskGroup);
-    }
-
-    public function testUpdateTaskGroup(): void
-    {
-        $taskGroup = (new TaskGroup(title: self::TASK_GROUP_TITLE));
-        $task = (new Task(text: self::TASK_TEXT));
-        $taskGroup->addTask($task);
-
         $newTaskGroup = (new TaskGroup(title: self::NEW_TASK_GROUP_TITLE));
 
         $this->saveEntities($task, $taskGroup, $newTaskGroup);
 
-        $this->client->request(Request::METHOD_POST, self::APP_ROUTE . '/update/group/' . $task->getId(), [
+        $this->client->request(Request::METHOD_POST, self::APP_ROUTE . '/update/' . $task->getId(), [
+            'text' => self::NEW_TASK_TEXT,
             'taskGroupId' => $newTaskGroup->getId(),
         ]);
 
@@ -89,7 +64,7 @@ class TaskControllerTest extends AbstractController
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
         $this->assertTaskDTO($responseContent);
 
-        $this->assertEquals(0, $taskGroup->getTasks()->count());
+        $this->assertEquals(self::NEW_TASK_TEXT, $responseContent['text']);
         $this->assertEquals($newTaskGroup->getId(), $responseContent['taskGroupId']);
         $this->isActiveTask($responseContent);
 

@@ -26,16 +26,10 @@ class TaskController extends AbstractController
         return $this->json($this->taskService->createTask($request), Response::HTTP_CREATED);
     }
 
-    #[Route('/update/text/{id}', name: 'update-text', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_POST)]
-    public function updateTaskText(Task $task, Request $request): JsonResponse
+    #[Route('/update/{id}', name: 'update', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_POST)]
+    public function updateTask(Task $task, Request $request): JsonResponse
     {
-        return $this->json($this->taskService->updateTaskText($task, $request), Response::HTTP_OK);
-    }
-
-    #[Route('/update/group/{id}', name: 'update-group', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_POST)]
-    public function updateTaskGroup(Task $task, Request $request): JsonResponse
-    {
-        return $this->json($this->taskService->updateTaskGroup($task, $request), Response::HTTP_OK);
+        return $this->json($this->taskService->updateTask($task, $request), Response::HTTP_OK);
     }
 
     #[Route('/done/{id}', name: 'done', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_POST)]

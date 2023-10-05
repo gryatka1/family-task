@@ -90,6 +90,32 @@ class TaskGroupControllerTest extends AbstractController
         $this->deleteEntities($task, $newTask, $taskGroup, $newTaskGroup);
     }
 
+    public function testGetAllTaskGroupTitles(): void
+    {
+        $taskGroup = (new TaskGroup(title: self::TASK_GROUP_TITLE));
+        $task = (new Task(text: self::TASK_TEXT));
+        $taskGroup->addTask($task);
+
+        $newTaskGroup = (new TaskGroup(title: self::NEW_TASK_GROUP_TITLE));
+        $newTask = (new Task(text: self::NEW_TASK_TEXT));
+        $newTaskGroup->addTask($newTask);
+
+        $this->saveEntities($task, $newTask, $taskGroup, $newTaskGroup);
+
+        $this->client->request(Request::METHOD_GET, self::APP_ROUTE . '/group-titles');
+
+        $this->assertResponseIsSuccessful();
+
+        $response = $this->client->getResponse();
+        $responseContent = json_decode($response->getContent(), true);
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+
+        $this->assertIsArray($responseContent);
+
+        $this->deleteEntities($task, $newTask, $taskGroup, $newTaskGroup);
+    }
+
     public function testUpdateTaskGroupTitle(): void
     {
         $taskGroup = (new TaskGroup(title: self::TASK_GROUP_TITLE));
