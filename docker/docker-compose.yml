@@ -31,7 +31,7 @@ services:
         ports:
             - ${POSTGRES_PORT}:5432
         volumes:
-            - db_data:/var/lib/postgresql/data:rw
+            - task_db_data:/var/lib/postgresql/data:rw
         networks:
             family:
                 aliases:
@@ -43,4 +43,4 @@ networks:
         external: true
 
 volumes:
-    db_data:
+    task_db_data:
