@@ -41,6 +41,7 @@ class TaskGroupController extends AbstractController
     #[Route('/group-titles', name: 'get-task-group-titles', methods: Request::METHOD_GET)]
     public function getAllTaskGroupTitles(): JsonResponse
     {
+        $user = $this->getUser();
         return $this->json($this->taskGroupService->getAllTaskGroupTitles(), Response::HTTP_OK);
     }
 
