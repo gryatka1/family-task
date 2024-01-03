@@ -3,7 +3,7 @@ doctrine:
         connections:
             default:
                 url: '%env(resolve:DATABASE_URL)%'
-            customer:
+            activeUser:
                 url: '%env(resolve:USER_DATABASE_URL)%'
         default_connection: default
 
@@ -11,7 +11,7 @@ doctrine:
         default_entity_manager: default
         entity_managers:
             ActiveUser:
-                connection: customer
+                connection: activeUser
                 mappings:
                     ActiveUser:
                         is_bundle: false

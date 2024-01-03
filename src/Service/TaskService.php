@@ -38,8 +38,9 @@ class TaskService
     {
         $task->setText($request->get('text'));
         $taskGroup = $this->taskGroupRepository->find($request->get('taskGroupId'));
-        $taskGroup->addTask($task);
+        $task->setTaskGroup($taskGroup);
 
+        $this->entityManager->persist($task);
         $this->entityManager->flush();
 
         return $this->getTaskDTO($task);

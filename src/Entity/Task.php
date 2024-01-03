@@ -2,30 +2,31 @@
 
 namespace App\Entity;
 
-use App\Entity\Trait;
 use App\Repository\TaskRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 #[ORM\Table(name: '`task`')]
+#[ORM\Index(columns: ['id'], name: 'task_id_idx')]
 class Task
 {
     use Trait\SoftDelete;
     use Trait\CreatedAt;
 
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\GeneratedValue('IDENTITY')]
+    #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private string $text;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private ?DateTimeImmutable $doneAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'tasks')]
+    #[ORM\ManyToOne(targetEntity: TaskGroup::class, cascade: ['persist', 'remove'], inversedBy: 'tasks')]
+    #[ORM\Column(name: '`task_group_id`', nullable: false)]
     private ?TaskGroup $taskGroup = null;
 
     public function __construct(string $text)
@@ -69,7 +70,7 @@ class Task
         return $this->taskGroup;
     }
 
-    public function setTaskGroup(?TaskGroup $taskGroup): static
+    public function setTaskGroup(TaskGroup $taskGroup): static
     {
         $this->taskGroup = $taskGroup;
 

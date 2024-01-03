@@ -11,20 +11,21 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TaskGroupRepository::class)]
 #[ORM\Table(name: '`task_group`')]
+#[ORM\Index(columns: ['id'], name: 'task_group_id_idx')]
 class TaskGroup
 {
     use Trait\SoftDelete;
     use Trait\CreatedAt;
 
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\GeneratedValue('IDENTITY')]
+    #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private string $title;
 
-    #[ORM\OneToMany(mappedBy: 'taskGroup', targetEntity: Task::class)]
+    #[ORM\OneToMany(mappedBy: 'taskGroup', targetEntity: Task::class, cascade: ['persist'], orphanRemoval: true)]
     private Collection $tasks;
 
     public function __construct($title)
@@ -62,22 +63,8 @@ class TaskGroup
 
     public function addTask(Task $task): static
     {
-        if (!$this->tasks->contains($task)) {
-            $this->tasks->add($task);
-            $task->getTaskGroup()?->removeTask($task);
-            $task->setTaskGroup($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTask(Task $task): static
-    {
-        if ($this->tasks->removeElement($task)) {
-            if ($task->getTaskGroup() === $this) {
-                $task->setTaskGroup(null);
-            }
-        }
+        $this->tasks->add($task);
+        $task->setTaskGroup($this);
 
         return $this;
     }
