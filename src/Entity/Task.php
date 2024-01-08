@@ -26,8 +26,8 @@ class Task
     private ?DateTimeImmutable $doneAt = null;
 
     #[ORM\ManyToOne(targetEntity: TaskGroup::class, cascade: ['persist', 'remove'], inversedBy: 'tasks')]
-    #[ORM\Column(name: '`task_group_id`', nullable: false)]
-    private ?TaskGroup $taskGroup = null;
+    #[ORM\JoinColumn(name: "task_group_id")]
+    private TaskGroup $taskGroup;
 
     public function __construct(string $text)
     {
@@ -65,7 +65,7 @@ class Task
         return $this;
     }
 
-    public function getTaskGroup(): ?TaskGroup
+    public function getTaskGroup(): TaskGroup
     {
         return $this->taskGroup;
     }

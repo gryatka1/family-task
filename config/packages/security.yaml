@@ -6,8 +6,9 @@ security:
     providers:
         app_user_provider:
             entity:
-                class: App\Entity\ActiveUser\User
+                class: ActiveUser\Entity\User
                 property: email
+                manager_name: ActiveUser
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

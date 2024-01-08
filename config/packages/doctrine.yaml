@@ -15,8 +15,8 @@ doctrine:
                 mappings:
                     ActiveUser:
                         is_bundle: false
-                        dir: '%kernel.project_dir%/src/Entity/ActiveUser'
-                        prefix: 'App\Entity\ActiveUser'
+                        dir: '%kernel.project_dir%/vendor/gryatka1/active-user/src/Entity'
+                        prefix: 'ActiveUser\Entity'
                         alias: User
             default:
                 connection: default

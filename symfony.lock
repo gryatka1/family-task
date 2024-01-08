@@ -26,6 +26,9 @@
             "migrations/.gitignore"
         ]
     },
+    "gryatka1/active-user": {
+        "version": "dev-main"
+    },
     "phpunit/phpunit": {
         "version": "10.3",
         "recipe": {
