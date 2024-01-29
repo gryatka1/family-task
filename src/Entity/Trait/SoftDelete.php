@@ -21,4 +21,9 @@ trait SoftDelete
 
         return $this;
     }
+
+    public function isDeleted(): bool
+    {
+        return $this->deletedAt !== null;
+    }
 }

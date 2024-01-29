@@ -21,28 +21,16 @@ class TaskGroupRepository extends ServiceEntityRepository
         parent::__construct($registry, TaskGroup::class);
     }
 
-//    /**
-//     * @return TaskGroup[] Returns an array of TaskGroup objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return array<TaskGroup>
+     */
+    public function findActiveTaskGroups(): array
+    {
+        $qb = $this->createQueryBuilder('tg');
 
-//    public function findOneBySomeField($value): ?TaskGroup
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        return $qb
+            ->andWhere($qb->expr()->isNull('tg.deleted_at'))
+            ->getQuery()
+            ->getResult();
+    }
 }

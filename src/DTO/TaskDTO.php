@@ -16,7 +16,6 @@ final class TaskDTO implements JsonSerializable
         private readonly DateTimeImmutable $createdAt,
         private readonly int $taskGroupId,
         private readonly ?DateTimeImmutable $doneAt,
-        private readonly ?DateTimeImmutable $deletedAt,
     )
     {
     }
@@ -44,10 +43,5 @@ final class TaskDTO implements JsonSerializable
     public function getDoneAt(): ?DateTimeImmutable
     {
         return $this->doneAt;
-    }
-
-    public function getDeletedAt(): ?DateTimeImmutable
-    {
-        return $this->deletedAt;
     }
 }

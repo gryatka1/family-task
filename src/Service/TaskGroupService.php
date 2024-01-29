@@ -38,7 +38,7 @@ class TaskGroupService
     {
         $taskGroupsCollection = new ArrayCollection();
 
-        $taskGroups = $this->taskGroupRepository->findAll();
+        $taskGroups = $this->taskGroupRepository->findActiveTaskGroups();
 
         foreach ($taskGroups as $taskGroup) {
             $taskGroupDTO = $this->getTaskGroupDTO($taskGroup);
@@ -50,11 +50,11 @@ class TaskGroupService
 
     public function getAllTaskGroupTitles(): array
     {
-        $taskGroups = $this->taskGroupRepository->findAll();
+        $taskGroups = $this->taskGroupRepository->findActiveTaskGroups();
 
-        return array_reduce($taskGroups, function ($re, TaskGroup $taskGroup) {
-            $re[$taskGroup->getId()] = $taskGroup->getTitle();
-            return $re;
+        return array_reduce($taskGroups, function ($result, TaskGroup $taskGroup) {
+            $result[$taskGroup->getId()] = $taskGroup->getTitle();
+            return $result;
         }, []);
     }
 
@@ -69,7 +69,6 @@ class TaskGroupService
                 createdAt: $task->getCreatedAt(),
                 taskGroupId: $taskGroup->getId(),
                 doneAt: $task->getDoneAt(),
-                deletedAt: $task->getDeletedAt()
             );
 
             $taskDTOCollection->add($taskDTO);

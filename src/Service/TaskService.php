@@ -72,7 +72,6 @@ class TaskService
             createdAt: $task->getCreatedAt(),
             taskGroupId: $taskGroup ? $taskGroup->getId() : $task->getTaskGroup()->getId(),
             doneAt: $task->getDoneAt(),
-            deletedAt: $task->getDeletedAt()
         );
     }
 }

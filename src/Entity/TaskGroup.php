@@ -58,7 +58,7 @@ class TaskGroup
      */
     public function getTasks(): Collection
     {
-        return $this->tasks;
+        return $this->tasks->filter(fn (Task $task) => !$task->isDeleted());
     }
 
     public function addTask(Task $task): static
