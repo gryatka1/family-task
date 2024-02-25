@@ -41,6 +41,6 @@ class TaskController extends AbstractController
     #[Route('/delete/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_DELETE)]
     public function deleteTask(Task $task): JsonResponse
     {
-        return $this->json($this->taskService->removeTask($task), Response::HTTP_OK);
+        return $this->json($this->taskService->deleteTask($task), Response::HTTP_OK);
     }
 }

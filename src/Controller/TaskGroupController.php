@@ -29,19 +29,13 @@ class TaskGroupController extends AbstractController
     #[Route('/group/{id}', name: 'get-task-group', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_GET)]
     public function getTaskGroup(TaskGroup $taskGroup): JsonResponse
     {
-        return $this->json($this->taskGroupService->getTaskGroupDTO($taskGroup), Response::HTTP_OK);
+        return $this->json(TaskGroup::taskGroupAsDTO($taskGroup), Response::HTTP_OK);
     }
 
-    #[Route('/groups', name: 'get-task-groups', methods: Request::METHOD_GET)]
-    public function getAllTaskGroups(): JsonResponse
+    #[Route('/catalog', name: 'get-task-catalog', methods: Request::METHOD_GET)]
+    public function getCatalog(): JsonResponse
     {
-        return $this->json($this->taskGroupService->getAllTaskGroups(), Response::HTTP_OK);
-    }
-
-    #[Route('/group-titles', name: 'get-task-group-titles', methods: Request::METHOD_GET)]
-    public function getAllTaskGroupTitles(): JsonResponse
-    {
-        return $this->json($this->taskGroupService->getAllTaskGroupTitles(), Response::HTTP_OK);
+        return $this->json($this->taskGroupService->getCatalog(), Response::HTTP_OK);
     }
 
     #[Route('/update-title/{id}', name: 'update-title', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_POST)]
@@ -53,6 +47,6 @@ class TaskGroupController extends AbstractController
     #[Route('/delete/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: Request::METHOD_DELETE)]
     public function deleteTaskGroup(TaskGroup $taskGroup): JsonResponse
     {
-        return $this->json($this->taskGroupService->removeTaskGroup($taskGroup), Response::HTTP_OK);
+        return $this->json($this->taskGroupService->deleteTaskGroup($taskGroup), Response::HTTP_OK);
     }
 }

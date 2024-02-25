@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\TaskGroup;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @extends ServiceEntityRepository<TaskGroup>
@@ -22,14 +23,32 @@ class TaskGroupRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return array<TaskGroup>
+     * @return array<string>
      */
-    public function findActiveTaskGroups(): array
+    public function findTaskGroupsTitlesByUser(UserInterface $user): array
     {
         $qb = $this->createQueryBuilder('tg');
 
         return $qb
-            ->andWhere($qb->expr()->isNull('tg.deleted_at'))
+            ->select('tg.title')
+            ->where($qb->expr()->isNull('tg.deletedAt'))
+            ->andWhere($qb->expr()->eq('tg.createdByUserId', ':userId'))
+            ->setParameter('userId', $user->getId())
+            ->getQuery()
+            ->getSingleColumnResult();
+    }
+
+    /**
+     * @return array<TaskGroup>
+     */
+    public function findTaskGroupsByUser(UserInterface $user): array
+    {
+        $qb = $this->createQueryBuilder('tg');
+
+        return $qb
+            ->where($qb->expr()->isNull('tg.deletedAt'))
+            ->andWhere($qb->expr()->eq('tg.createdByUserId', ':userId'))
+            ->setParameter('userId', $user->getId())
             ->getQuery()
             ->getResult();
     }

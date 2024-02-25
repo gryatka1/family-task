@@ -10,6 +10,7 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 
 class TaskGroupService
@@ -17,7 +18,8 @@ class TaskGroupService
     private EntityRepository|TaskGroupRepository $taskGroupRepository;
 
     public function __construct(
-        private readonly EntityManagerInterface $entityManager
+        private readonly EntityManagerInterface $entityManager,
+        private readonly Security $security
     )
     {
         $this->taskGroupRepository = $this->entityManager->getRepository(TaskGroup::class);
@@ -25,74 +27,54 @@ class TaskGroupService
 
     public function createTaskGroup(Request $request): TaskGroupDTO
     {
-        $taskGroup = (new TaskGroup(title: $request->get('title')));
+        $taskGroup = (new TaskGroup(
+            title: $request->get('title'),
+            createdByUserId: $this->security->getUser()->getId(),
+        ));
 
-        $this->entityManager->persist($taskGroup);
-        $this->entityManager->flush();
+        $this->save($taskGroup);
 
-        return $this->getTaskGroupDTO($taskGroup);
+        return TaskGroup::taskGroupAsDTO($taskGroup);
+    }
+
+    public function getCatalog(): array
+    {
+        return [
+            'groups' => $this->getAllTaskGroups(),
+            'groupTitles' => $this->getAllTaskGroupTitles(),
+        ];
     }
 
     /** @return ArrayCollection<TaskGroupDTO> */
-    public function getAllTaskGroups(): ArrayCollection
+    protected function getAllTaskGroups(): ArrayCollection
     {
         $taskGroupsCollection = new ArrayCollection();
 
-        $taskGroups = $this->taskGroupRepository->findActiveTaskGroups();
+        $taskGroups = $this->taskGroupRepository->findTaskGroupsByUser($this->security->getUser());
 
         foreach ($taskGroups as $taskGroup) {
-            $taskGroupDTO = $this->getTaskGroupDTO($taskGroup);
+            $taskGroupDTO = TaskGroup::taskGroupAsDTO($taskGroup);
             $taskGroupsCollection->add($taskGroupDTO);
         }
 
         return $taskGroupsCollection;
     }
 
-    public function getAllTaskGroupTitles(): array
+    protected function getAllTaskGroupTitles(): array
     {
-        $taskGroups = $this->taskGroupRepository->findActiveTaskGroups();
-
-        return array_reduce($taskGroups, function ($result, TaskGroup $taskGroup) {
-            $result[$taskGroup->getId()] = $taskGroup->getTitle();
-            return $result;
-        }, []);
-    }
-
-    public function getTaskGroupDTO(TaskGroup $taskGroup): TaskGroupDTO
-    {
-        $taskDTOCollection = new ArrayCollection();
-
-        foreach ($taskGroup->getTasks() as $task) {
-            $taskDTO = new TaskDTO(
-                id: $task->getId(),
-                text: $task->getText(),
-                createdAt: $task->getCreatedAt(),
-                taskGroupId: $taskGroup->getId(),
-                doneAt: $task->getDoneAt(),
-            );
-
-            $taskDTOCollection->add($taskDTO);
-        }
-
-        return new TaskGroupDTO(
-            id: $taskGroup->getId(),
-            title: $taskGroup->getTitle(),
-            tasks: $taskDTOCollection,
-            createdAt: $taskGroup->getCreatedAt(),
-            deletedAt: $taskGroup->getDeletedAt()
-        );
+        return $this->taskGroupRepository->findTaskGroupsTitlesByUser($this->security->getUser());
     }
 
     public function updateTaskGroupTitle(Request $request, TaskGroup $taskGroup): TaskGroupDTO
     {
         $taskGroup->setTitle($request->get('title'));
 
-        $this->entityManager->flush();
+        $this->save($taskGroup);
 
-        return $this->getTaskGroupDTO($taskGroup);
+        return TaskGroup::taskGroupAsDTO($taskGroup);
     }
 
-    public function removeTaskGroup(TaskGroup $taskGroup): TaskGroupDTO
+    public function deleteTaskGroup(TaskGroup $taskGroup): TaskGroupDTO
     {
         $taskGroup->setDeletedAt(new DateTimeImmutable());
 
@@ -100,8 +82,14 @@ class TaskGroupService
             $task->setDeletedAt(new DateTimeImmutable());
         }
 
-        $this->entityManager->flush();
+        $this->save($taskGroup);
 
-        return $this->getTaskGroupDTO($taskGroup);
+        return TaskGroup::taskGroupAsDTO($taskGroup);
+    }
+
+    private function save(TaskGroup $taskGroup): void
+    {
+        $this->entityManager->persist($taskGroup);
+        $this->entityManager->flush();
     }
 }

@@ -9,6 +9,7 @@ use App\Repository\TaskGroupRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 
 class TaskService
@@ -16,7 +17,8 @@ class TaskService
     private EntityRepository|TaskGroupRepository $taskGroupRepository;
 
     public function __construct(
-        private readonly EntityManagerInterface $entityManager
+        private readonly EntityManagerInterface $entityManager,
+        private readonly Security $security
     )
     {
         $this->taskGroupRepository = $this->entityManager->getRepository(TaskGroup::class);
@@ -25,53 +27,58 @@ class TaskService
     public function createTask(Request $request): TaskDTO
     {
         $taskGroup = $this->taskGroupRepository->find($request->get('taskGroupId'));
-        $task = (new Task(text: $request->get('text')));
+        $task = new Task(
+            text: $request->get('text'),
+            createdByUserId: $this->security->getUser()->getId(),
+            assignedToUserId: $request->get('assignedToUserId'),
+            taskGroup: $taskGroup,
+        );
         $taskGroup->addTask($task);
 
-        $this->entityManager->persist($task);
-        $this->entityManager->flush();
+        $this->save($task);
 
-        return $this->getTaskDTO($task, $taskGroup);
+        return Task::taskAsDTO($task);
     }
 
     public function updateTask(Task $task, Request $request): TaskDTO
     {
-        $task->setText($request->get('text'));
-        $taskGroup = $this->taskGroupRepository->find($request->get('taskGroupId'));
-        $task->setTaskGroup($taskGroup);
+        $task
+            ->setText($request->get('text'))
+            ->setAssignedToUserId($request->get('assignedToUserId'))
+        ;
 
-        $this->entityManager->persist($task);
-        $this->entityManager->flush();
+        $newTaskGroupId = $request->get('taskGroupId');
+        if ($task->getTaskGroup()->getId() !== $newTaskGroupId) {
+            $newTaskGroup = $this->taskGroupRepository->find($newTaskGroupId);
+            $newTaskGroup->moveTaskToThisGroup($task);
+        }
 
-        return $this->getTaskDTO($task);
+        $this->save($task);
+
+        return Task::taskAsDTO($task);
     }
 
     public function doneTask(Task $task): TaskDTO
     {
         $task->setDoneAt(new DateTimeImmutable());
 
-        $this->entityManager->flush();
+        $this->save($task);
 
-        return $this->getTaskDTO($task);
+        return Task::taskAsDTO($task);
     }
 
-    public function removeTask(Task $task): TaskDTO
+    public function deleteTask(Task $task): TaskDTO
     {
         $task->setDeletedAt(new DateTimeImmutable());
 
-        $this->entityManager->flush();
+        $this->save($task);
 
-        return $this->getTaskDTO($task);
+        return Task::taskAsDTO($task);
     }
 
-    protected function getTaskDTO(Task $task, TaskGroup $taskGroup = null): TaskDTO
+    private function save(Task $task): void
     {
-        return new TaskDTO(
-            id: $task->getId(),
-            text: $task->getText(),
-            createdAt: $task->getCreatedAt(),
-            taskGroupId: $taskGroup ? $taskGroup->getId() : $task->getTaskGroup()->getId(),
-            doneAt: $task->getDoneAt(),
-        );
+        $this->entityManager->persist($task);
+        $this->entityManager->flush();
     }
 }

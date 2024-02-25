@@ -17,6 +17,7 @@ final class TaskGroupDTO implements JsonSerializable
         private readonly Collection $tasks,
         private readonly DateTimeImmutable $createdAt,
         private readonly ?DateTimeImmutable $deletedAt,
+        private readonly int $createdByUserId
     )
     {
     }
@@ -35,5 +36,20 @@ final class TaskGroupDTO implements JsonSerializable
     public function getTasks(): Collection
     {
         return $this->tasks;
+    }
+
+    public function getCreatedAt(): DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function getDeletedAt(): ?DateTimeImmutable
+    {
+        return $this->deletedAt;
+    }
+
+    public function getCreatedByUserId(): int
+    {
+        return $this->createdByUserId;
     }
 }
